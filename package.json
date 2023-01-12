@@ -1,0 +1,26 @@
+{
+  "name": "backend-redesorcial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrabalhosAcademicos358/BackEnd-RedeSorcial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TrabalhosAcademicos358/BackEnd-RedeSorcial/issues"
+  },
+  "homepage": "https://github.com/TrabalhosAcademicos358/BackEnd-RedeSorcial#readme",
+  "devDependencies": {
+    "prisma": "^4.8.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.8.1"
+  }
+}

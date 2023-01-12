@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int           @id @default(autoincrement())
+  username        String        @unique
+  email           String        @unique
+  name            String    
+  password        String    
+  photo_profile   String        @default("img/profile_default")
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  fotos           Foto[]        @relation()
+  comentario      Comentario[]  @relation("user")
+  responseComent  Comentario[]  @relation("userResponse")
+  userAmizade     Amizade[]     @relation("UserId")
+  friendAmizade   Amizade[]     @relation("FriendId")
+  curtida         Curtida[]     @relation()
+
+  @@map("users")
+}
+
+model Foto {
+  id            Int           @id @default(autoincrement())
+  user          User          @relation(fields: [userId], references: [id])
+  userId        Int
+  Comentario    Comentario[]  @relation()
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  curtida       Curtida[]     @relation()
+
+  @@map("fotos")
+}
+
+model Comentario {
+  id            Int       @id @default(autoincrement())
+  user          User      @relation(fields: [userId], references: [id], name: "user")
+  foto          Foto      @relation(fields: [fotoId], references: [id])
+  response      User      @relation(fields: [responseId], references: [id], name: "userResponse")
+  fotoId        Int
+  userId        Int
+  responseId    Int
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("comentarios")
+}
+
+model Amizade {
+  id           Int       @id @default(autoincrement()) 
+  user         User      @relation(fields: [userId], references: [id], name: "UserId")
+  friend       User      @relation(fields: [FriendId], references: [id], name: "FriendId")
+  userId       Int
+  FriendId     Int
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("amizades")
+}
+
+model Curtida {
+  id           Int        @id @default(autoincrement()) 
+  user         User       @relation(fields: [userId], references: [id])
+  userId       Int
+  foto         Foto       @relation(fields: [fotoId], references: [id])
+  fotoId       Int        
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("curtidas")
+}
