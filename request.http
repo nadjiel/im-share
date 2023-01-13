@@ -1,3 +1,5 @@
+##### CRUD USER
+
 ### Create User
 
 POST http://localhost:3000/api/v1/users
@@ -14,34 +16,31 @@ Content-Type: application/json
 
 GET http://localhost:3000/api/v1/users
 
-### Create Photo
+### Read User
 
-POST http://localhost:3000/localhost:3000/api/v1/photos
+GET http://localhost:3000/api/v1/users/1
+
+### Update user for PUT
+
+PUT http://localhost:3000/api/v1/users/1
 Content-Type: application/json
 
 {
-  "name": "Batata Frita",
-  "image": "/imgs/batatafrita.jpg",
-  "price": 5,
-  "category_id": 1
+  "name": "Marcio Cunha",
+  "email": "marcao@gmail.com",
+  "username": "Marcao",
+  "password": "Senha_Util"
 }
 
-### Read Photos
+### Update user for PATCH
 
-GET http://localhost:3000/api/v1/photos
-
-### Update Food
-
-PUT http://localhost:3000/foods/5
+PATCH http://localhost:3000/api/v1/users/1
 Content-Type: application/json
 
 {
-  "name": "Batata Frita",
-  "image": "/imgs/batatafrita.jpg",
-  "price": 5.5,
-  "category_id": 1
+  "photo_profile": "https://images.unsplash.com/photo-1582070595814-fe36a8d39532?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bWFyY298ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
 }
 
-### Delete Food
+### Delete User
 
-DELETE http://localhost:3000/foods/5
+DELETE http://localhost:3000/api/v1/users/1
