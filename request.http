@@ -1,0 +1,47 @@
+### Create User
+
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Marcio Cunha",
+  "email": "marcao@gmail.com",
+  "username": "Marcao",
+  "password": "Senha_Inutel"
+}
+
+### Read Users
+
+GET http://localhost:3000/api/v1/users
+
+### Create Photo
+
+POST http://localhost:3000/localhost:3000/api/v1/photos
+Content-Type: application/json
+
+{
+  "name": "Batata Frita",
+  "image": "/imgs/batatafrita.jpg",
+  "price": 5,
+  "category_id": 1
+}
+
+### Read Photos
+
+GET http://localhost:3000/api/v1/photos
+
+### Update Food
+
+PUT http://localhost:3000/foods/5
+Content-Type: application/json
+
+{
+  "name": "Batata Frita",
+  "image": "/imgs/batatafrita.jpg",
+  "price": 5.5,
+  "category_id": 1
+}
+
+### Delete Food
+
+DELETE http://localhost:3000/foods/5

@@ -102,3 +102,22 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Prisma
+
+vendor/
+.DS_Store
+.idea
+tmp-resolvers
+flow-typed
+yarn.lock
+javascript/**/migrations/
+typescript/**/migrations/
+misc/**/migrations/
+databases/**/migrations/
+experimental/**/*.db
+.next
+.vscode/
+.nuxt
+dev.db
+*.env*
