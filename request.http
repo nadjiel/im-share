@@ -13,6 +13,16 @@ Content-Type: application/json
   "password": "Senha_Inutel"
 }
 
+### Login User
+
+POST http://localhost:3000/api/v1/login
+Content-Type: application/json
+
+{
+  "username": "Marcao",
+  "password": "Senha_Inutel"
+}
+
 ### Read All Users
 
 GET http://localhost:3000/api/v1/users
