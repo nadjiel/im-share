@@ -6,13 +6,14 @@ POST http://localhost:3000/api/v1/users
 Content-Type: application/json
 
 {
+  "id": "1",
   "name": "Marcio Cunha",
   "email": "marcao@gmail.com",
   "username": "Marcao",
   "password": "Senha_Inutel"
 }
 
-### Read Users
+### Read All Users
 
 GET http://localhost:3000/api/v1/users
 
