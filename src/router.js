@@ -7,7 +7,7 @@ const authenticate = require("./controller/Authenticate")
 const router = express.Router()
 
 router.post("/api/v1/login", authenticate.authenticate)
-// router.post("/api/v1/refresh_token", authenticate.refreshToken)
+router.post("/api/v1/refresh_token", authenticate.refreshToken)
 
 router.get("/api/v1/users", usersController.getAllUsers)
 router.post("/api/v1/users", usersController.createUser)

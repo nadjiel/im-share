@@ -8,20 +8,21 @@ datasource db {
 }
 
 model User {
-  id              Int           @id @default(autoincrement())
-  username        String        @unique
-  email           String        @unique
+  id              Int             @id @default(autoincrement())
+  username        String          @unique
+  email           String          @unique
   name            String    
   password        String    
-  photo_profile   String        @default("img/profile_default")
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  fotos           Foto[]        @relation()
-  comentario      Comentario[]  @relation("user")
-  responseComent  Comentario[]  @relation("userResponse")
-  userAmizade     Amizade[]     @relation("UserId")
-  friendAmizade   Amizade[]     @relation("FriendId")
-  curtida         Curtida[]     @relation()
+  photo_profile   String          @default("img/profile_default")
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  fotos           Foto[]          @relation()
+  comentario      Comentario[]    @relation("user")
+  responseComent  Comentario[]    @relation("userResponse")
+  userAmizade     Amizade[]       @relation("UserId")
+  friendAmizade   Amizade[]       @relation("FriendId")
+  curtida         Curtida[]       @relation()
+  refreshToken   refreshToken[]   @relation()
 
   @@map("users")
 }
@@ -74,4 +75,13 @@ model Curtida {
   updatedAt     DateTime  @updatedAt
 
   @@map("curtidas")
+}
+
+model refreshToken {
+  token          String     @id
+  expires        Int
+  user           User       @relation(fields: [userId], references: [id])
+  userId         Int
+
+  @@map("refresh_token")
 }
