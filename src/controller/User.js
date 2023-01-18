@@ -18,12 +18,12 @@ const getAllUsers = async (req, res, next) => {
     }
 }
 
-const verifyFieldsUnique = async (verify) => {
+const verifyFieldsUnique = async (verify, idUpdate = null) => {
     const userCurrent = await prisma.user.findFirst({
         where: verify
     })
 
-    if (userCurrent) {
+    if (userCurrent && userCurrent?.id !== idUpdate) {
         if (userCurrent.id === verify.id) 
             throw new Error("Esse ID entra em conflito a outro id de usuario")
         if (userCurrent.email === verify.email)
@@ -95,7 +95,7 @@ async function updateUser(req, res, next) {
             throw new Error("Sem campos de update.")
         }
 
-        await verifyFieldsUnique({ email, username })
+        await verifyFieldsUnique({ email, username }, id)
     
         const user = await prisma.user.update({
           where: { id },
