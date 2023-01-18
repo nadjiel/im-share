@@ -1,5 +1,7 @@
-const prisma = require("../database/PrismaClient")
+const validateUuid = require('uuid-validate');
 const bcrypt = require('bcrypt')
+
+const prisma = require("../database/PrismaClient")
 
 const hashPassword = async (password) => {
     const saltRounds = 10
@@ -16,7 +18,7 @@ const getUserForId = async (req, res, next) => {
     try {
         const { id } = req.params
         const user = await prisma.user.findUnique({
-            where: { id: Number(id) }
+            where: { id }
         })
         res.json(user)
     } catch (err) {
@@ -34,8 +36,13 @@ const createUser = async (req, res, next) => {
         const create = { name, email, username }
         create.password = await hashPassword(password)
 
-        if (id) create.id = Number(id)
         if (photo_profile) create.photo_profile = photo_profile
+        
+        if (id) {
+            const error = "O id enviado não é um UUID"
+            if (validateUuid(id)) create.id = id
+            else return res.status(400).json({ error })
+        }
 
         const user = await prisma.user.create({
             data: create
@@ -82,7 +89,7 @@ async function updateUser(req, res, next) {
         }
     
         const user = await prisma.user.update({
-          where: { id: Number(id) },
+          where: { id },
           data: updates
         })
     
@@ -109,7 +116,7 @@ async function deleteUser(req, res, next) {
     try {
         const { id } = req.params
         const user = await prisma.user.delete({
-          where: { id: Number(id) }
+          where: { id }
         })
         res.status(204).json(user)
         next()

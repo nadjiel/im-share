@@ -28,6 +28,7 @@
     "dayjs": "^1.11.7",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "uuid-validate": "^0.0.3"
   }
 }

@@ -6,10 +6,10 @@ POST http://localhost:3000/api/v1/users
 Content-Type: application/json
 
 {
-  "id": "1",
-  "name": "Marcio Cunha",
-  "email": "marcao@gmail.com",
-  "username": "Marcao",
+  "id": "dfdc8dac-d8dd-48bc-be39-d63c42d6a421",
+  "name": "Marta",
+  "email": "mata@gmail.com",
+  "username": "Martinha",
   "password": "Senha_Inutel"
 }
 
