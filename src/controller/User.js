@@ -10,8 +10,36 @@ const hashPassword = async (password) => {
 }
 
 const getAllUsers = async (req, res, next) => {
-    const users = await prisma.user.findMany()
-    res.json(users)
+    try {
+        const users = await prisma.user.findMany()
+        res.json(users)
+    } catch (err) {
+        next(err)
+    }
+}
+
+const verifyFieldsUnique = async (verify) => {
+    const userCurrent = await prisma.user.findFirst({
+        where: verify
+    })
+
+    if (userCurrent) {
+        if (userCurrent.id === verify.id) 
+            throw new Error("Esse ID entra em conflito a outro id de usuario")
+        if (userCurrent.email === verify.email)
+           throw new Error("Esse Email já está em uso")
+        if (userCurrent.username === verify.username)
+            throw new Error("Esse username já pertence a algum usuario")
+    }
+} 
+
+const verifyUUID = (id) => {
+    const mensage = "O id enviado não é um UUID"
+    
+    if (!id) return
+
+    if (validateUuid(id)) create.id = id
+    else throw new Error(mensage)
 }
 
 const getUserForId = async (req, res, next) => {
@@ -20,29 +48,24 @@ const getUserForId = async (req, res, next) => {
         const user = await prisma.user.findUnique({
             where: { id }
         })
+        if (!user) throw new Error("Usuário não existente")
         res.json(user)
     } catch (err) {
-        console.log(err)
-        res.status(400).json({ 
-            error: "Ocorreu um error ao consultar usuario" 
-        })
+        next(err)
     }
 }
 
 const createUser = async (req, res, next) => {
     try {
         const { id, name, email, username, password, photo_profile } = req.body
-    
+
+        await verifyFieldsUnique({ id, username, email })
+        await verifyUUID(id)
+
         const create = { name, email, username }
         create.password = await hashPassword(password)
 
         if (photo_profile) create.photo_profile = photo_profile
-        
-        if (id) {
-            const error = "O id enviado não é um UUID"
-            if (validateUuid(id)) create.id = id
-            else return res.status(400).json({ error })
-        }
 
         const user = await prisma.user.create({
             data: create
@@ -50,23 +73,7 @@ const createUser = async (req, res, next) => {
     
         res.status(201).json(user)
     } catch (err) {
-        console.log(err)
-        
-        const listError = err.meta.target
-
-        const fields = { }
-
-        if (listError.includes("id")) {
-            fields.id = "Esse ID entra em conflito a outro id de usuario"
-        }
-        if (listError.includes("email")) {
-            fields.email = "Esse Email já está em uso"
-        }
-        if (listError.includes("username")) {
-            fields.username = "Esse username já pertence a algum usuario"
-        }
-
-        res.status(400).json({ fields })
+        next(err)
     }
 }
 
@@ -85,8 +92,10 @@ async function updateUser(req, res, next) {
         if (password) updates.password = await hashPassword(password)
     
         if (Object.keys(updates).length === 0) {
-            return res.status(400).json({ error: "Sem campos de update." })
+            throw new Error("Sem campos de update.")
         }
+
+        await verifyFieldsUnique({ email, username })
     
         const user = await prisma.user.update({
           where: { id },
@@ -95,36 +104,27 @@ async function updateUser(req, res, next) {
     
         res.status(201).json(user)
     } catch (err) {
-        console.log(err)
-        
-        const listError = err.meta.target
-
-        const fields = { }
-        
-        if (listError.includes("email")) {
-            fields.email = "Esse Email já está em uso"
-        }
-        if (listError.includes("username")) {
-            fields.username = "Esse username já pertence a algum usuario"
-        }
-
-        res.status(400).json({ fields })
+        next(err)
     }
 }
 
 async function deleteUser(req, res, next) {
     try {
         const { id } = req.params
-        const user = await prisma.user.delete({
-          where: { id }
-        })
+
+        const filter = { where: { id } }
+        
+        const user = await prisma.user.findFirst(filter) 
+        
+        if (!user) throw new Error("Usuário não existente")
+        
+        await prisma.user.delete(filter)
+
         res.status(204).json(user)
+
         next()
     } catch (err) {
-        console.log(err)
-        res.status(400).json({ 
-            error: "Usuário não existente" 
-        })
+        next(err)
     }
 }
 

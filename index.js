@@ -26,6 +26,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(error404)
 app.use(errorHandling);
 
-const port = process.env.PORT || 300
+const port = process.env.PORT || 3000
 
 app.listen(port, () => console.log(`Aplicação rodando na porta ${port}`))
