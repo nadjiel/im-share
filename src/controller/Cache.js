@@ -23,18 +23,12 @@ const setPessoa = async (req, res, next) => {
 const getPessoa = async (req, res, next) => {
     try {
         const { id } = req.params
-        // const { table } = res.locals
-
-        // Aqui eu pego o nome da tabela pelo caminho da api
-
-        const currentRoute = req.path
-        const wordTable = currentRoute.split("/")[3]
-        const table = wordTable.substring(0, wordTable.length - 1)
+        const { table } = res.locals
 
         const objUser = await redis.get(`${table}_${id}`)
 
         if (objUser === null) next()
-        else res.json(JSON.parse(objUser))
+        else res.json((JSON.parse(objUser)));
     } catch (err) {
         next(err)
     }

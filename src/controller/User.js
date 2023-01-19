@@ -33,6 +33,11 @@ const verifyUUID = (id) => {
     else throw new Error(mensage)
 }
 
+const defineResLocals = (req, res, next) => {
+    res.locals.table = "user"
+    next()
+}
+
 const getAllUsers = async (req, res, next) => {
     try {
         const users = await prisma.user.findMany()
@@ -52,7 +57,6 @@ const getUserForId = async (req, res, next) => {
 
         if (!user) throw new Error("Usuário não existente")
         
-        res.locals.table = "user"
         next()
     } catch (err) {
         next(err)
@@ -107,7 +111,6 @@ async function updateUser(req, res, next) {
           data: updates
         })
         
-        res.locals.table = "user"
         next()
     } catch (err) {
         next(err)
@@ -126,11 +129,10 @@ async function deleteUser(req, res, next) {
         
         await prisma.user.delete(filter)
 
-        res.locals.table = "user"
         next()
     } catch (err) {
         next(err)
     }
 }
 
-module.exports = { getAllUsers, getUserForId, createUser, updateUser, deleteUser }
+module.exports = { getAllUsers, getUserForId, createUser, updateUser, deleteUser, defineResLocals }
