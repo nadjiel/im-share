@@ -9,15 +9,6 @@ const hashPassword = async (password) => {
     return await hash
 }
 
-const getAllUsers = async (req, res, next) => {
-    try {
-        const users = await prisma.user.findMany()
-        res.json(users)
-    } catch (err) {
-        next(err)
-    }
-}
-
 const verifyFieldsUnique = async (verify, idUpdate = null) => {
     const userCurrent = await prisma.user.findFirst({
         where: verify
@@ -38,18 +29,31 @@ const verifyUUID = (id) => {
     
     if (!id) return
 
-    if (validateUuid(id)) create.id = id
+    if (validateUuid(id)) return true
     else throw new Error(mensage)
+}
+
+const getAllUsers = async (req, res, next) => {
+    try {
+        const users = await prisma.user.findMany()
+        res.json(users)
+    } catch (err) {
+        next(err)
+    }
 }
 
 const getUserForId = async (req, res, next) => {
     try {
         const { id } = req.params
+        
         const user = await prisma.user.findUnique({
             where: { id }
         })
+
         if (!user) throw new Error("Usuário não existente")
-        res.json(user)
+        
+        res.locals.table = "user"
+        next()
     } catch (err) {
         next(err)
     }
@@ -60,12 +64,13 @@ const createUser = async (req, res, next) => {
         const { id, name, email, username, password, photo_profile } = req.body
 
         await verifyFieldsUnique({ id, username, email })
-        await verifyUUID(id)
 
         const create = { name, email, username }
         create.password = await hashPassword(password)
 
         if (photo_profile) create.photo_profile = photo_profile
+
+        if (await verifyUUID(id)) create.id = id
 
         const user = await prisma.user.create({
             data: create
@@ -97,12 +102,13 @@ async function updateUser(req, res, next) {
 
         await verifyFieldsUnique({ email, username }, id)
     
-        const user = await prisma.user.update({
+        await prisma.user.update({
           where: { id },
           data: updates
         })
-    
-        res.status(201).json(user)
+        
+        res.locals.table = "user"
+        next()
     } catch (err) {
         next(err)
     }
@@ -120,8 +126,7 @@ async function deleteUser(req, res, next) {
         
         await prisma.user.delete(filter)
 
-        res.status(204).json(user)
-
+        res.locals.table = "user"
         next()
     } catch (err) {
         next(err)
