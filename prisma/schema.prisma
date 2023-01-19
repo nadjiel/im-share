@@ -8,73 +8,73 @@ datasource db {
 }
 
 model User {
-  id              String          @id @default(uuid())
-  username        String          @unique
-  email           String          @unique
-  name            String    
-  password        String    
-  photo_profile   String          @default("img/profile_default")
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  fotos           Foto[]          @relation()
-  comentario      Comentario[]    @relation("user")
-  responseComent  Comentario[]    @relation("userResponse")
-  userAmizade     Amizade[]       @relation("UserId")
-  friendAmizade   Amizade[]       @relation("FriendId")
-  curtida         Curtida[]       @relation()
-  refreshToken   refreshToken[]   @relation()
+  id                String            @id @default(uuid())
+  username          String            @unique
+  email             String            @unique
+  name              String    
+  password          String    
+  photo_profile     String            @default("img/profile_default.jpg")
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  photos            Photo[]           @relation()
+  comment           Comment[]         @relation("user")
+  responseComment   Comment[]         @relation("userResponse")
+  userFriendship    Friendship[]      @relation("UserId")
+  friendFriendship  Friendship[]      @relation("FriendId")
+  like              Like[]            @relation()
+  refreshToken      refreshToken[]    @relation()
 
   @@map("users")
 }
 
-model Foto {
+model Photo {
   id            String        @id @default(uuid())
   user          User          @relation(fields: [userId], references: [id])
   userId        String
-  Comentario    Comentario[]  @relation()
+  comment       Comment[]     @relation()
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
-  curtida       Curtida[]     @relation()
+  like          Like[]        @relation()
 
-  @@map("fotos")
+  @@map("photos")
 }
 
-model Comentario {
-  id            String    @id @default(uuid())
-  user          User      @relation(fields: [userId], references: [id], name: "user")
-  foto          Foto      @relation(fields: [fotoId], references: [id])
-  response      User      @relation(fields: [responseId], references: [id], name: "userResponse")
-  fotoId        String
+model Comment {
+  id            String      @id @default(uuid())
+  user          User        @relation(fields: [userId], references: [id], name: "user")
+  photo         Photo       @relation(fields: [photoId], references: [id])
+  response      User        @relation(fields: [responseId], references: [id], name: "userResponse")
+  photoId       String
   userId        String
   responseId    String
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 
-  @@map("comentarios")
+  @@map("comments")
 }
 
-model Amizade {
-  id            String    @id @default(uuid())
-  user          User      @relation(fields: [userId], references: [id], name: "UserId")
-  friend        User      @relation(fields: [FriendId], references: [id], name: "FriendId")
+model Friendship {
+  id            String      @id @default(uuid())
+  user          User        @relation(fields: [userId], references: [id], name: "UserId")
+  friend        User        @relation(fields: [friendId], references: [id], name: "FriendId")
   userId        String
-  FriendId      String
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  friendId      String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 
-  @@map("amizades")
+  @@map("friendships")
 }
 
-model Curtida {
-  id           String     @id @default(uuid())
-  user         User       @relation(fields: [userId], references: [id])
+model Like {
+  id           String       @id @default(uuid())
+  user         User         @relation(fields: [userId], references: [id])
   userId       String
-  foto         Foto       @relation(fields: [fotoId], references: [id])
-  fotoId       String        
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  photo        Photo        @relation(fields: [photoId], references: [id])
+  photoId      String        
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 
-  @@map("curtidas")
+  @@map("likes")
 }
 
 model refreshToken {
