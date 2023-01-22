@@ -9,7 +9,7 @@ const key_private = process.env.KEY_JWT
 
 dayjs.extend(duration)
 
-const secondInHour = dayjs.duration({ hours: 1 }).asSeconds() 
+const secondInHour = dayjs.duration({ hours: 1 }).asSeconds()
 const secondInYear = dayjs.duration({ years: 1 }).asSeconds()
 
 const generatedToken = (id, expiresIn) => {
@@ -34,7 +34,7 @@ const savedTokenInBd = async (token, userId) => {
 
 const authenticate = async (req, res, next) => {
     const { username, password } = req.body
-    
+
     const userExists = await prisma.user.findFirst({
         where: { username }
     })
@@ -64,21 +64,21 @@ const refreshToken = async (req, res, next) => {
 
     if (!refresh) {
         return res.status(400).json({
-            error: "É nescessario passar o refresh token para renovar o access" 
+            error: "É nescessario passar o refresh token para renovar o access"
         })
     }
 
     const dataToken = await prisma.refreshToken.findFirst({
-        where: { 
-            token: refresh 
+        where: {
+            token: refresh
         }
     })
 
     const tokenExpire = dayjs().isAfter(dayjs.unix(dataToken?.expires))
 
     if (!dataToken || tokenExpire) {
-        return res.status(401).json({ 
-            error: "Token invalido" 
+        return res.status(401).json({
+            error: "Token invalido"
         })
     }
 
@@ -95,7 +95,7 @@ const isAuthenticated = async (req, res, next) => {
         })
     }
 
-    const [ , token ] = authToken.split(" ")
+    const [, token] = authToken.split(" ")
 
     try {
         jwt.verify(token, key_private)
