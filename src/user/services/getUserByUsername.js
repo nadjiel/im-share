@@ -9,8 +9,6 @@ export async function getUserByUsername(username) {
     },
   });
 
-  console.log(user);
-
   if (!user) throw new Error("Usuário não existente");
   return user;
 }
