@@ -1,0 +1,22 @@
+{% extends "../layout.njk" %}
+
+{% set title = "Usuário" %}
+
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="./css/post.css"/>
+{% endblock %}
+
+{% block content %}
+    <section id="posts">
+        {% for post in user.posts %}
+            {% include "../components/_post.njk" %}
+        {% endfor %}
+        {% for comentarios in user.comentarios %}
+            {% include "../components/_comentario.njk" %}
+        {% endfor %}
+    </section>
+{% endblock %}
+
+{% block script %}
+    
+{% endblock %}
