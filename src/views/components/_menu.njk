@@ -3,8 +3,10 @@
     <a href="/" class="font-bold px-2">
         <img src="/imgs/logo.png" class="h-10"/>
     </a>
-    <a href="/publish" class="bg-blue-500 p-2 rounded-lg flex-row text-white items-center gap-1">
-        <i class="fa-solid fa-plus"></i>
-        Publicar
+    {% if not hidePublish %}
+        <a href="/publish" class="bg-blue-500 p-2 rounded-lg flex-row text-white items-center gap-1">
+            <i class="fa-solid fa-plus"></i>
+            Publicar
     </a>
+    {% endif %}
 </nav>

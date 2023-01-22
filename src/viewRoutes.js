@@ -11,6 +11,10 @@ routes.get("/@:username", async (req, res) => {
   res.render("pages/user", { user });
 });
 
+routes.get("/publish", async (req, res) => {
+  res.render("pages/publish");
+});
+
 routes.get("/", async (req, res) => {
   let posts = await getPosts();
   res.render("pages/index", { posts });

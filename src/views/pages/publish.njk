@@ -1,0 +1,24 @@
+{% set hidePublish = true %}
+{% extends "../layout.njk" %}
+{% set title = "Usuário" %}
+{% block content %}
+    <form class='flex-row flex-1'>
+        <div class="bg-gray-300 flex-1 flex-col items-center justify-center gap-2 text-2xl">
+            <i class="fa-regular fa-image"></i>
+            Adicionar imagem
+        </div>
+        <div class="flex-1 p-4 gap-2">
+            <label>Descrição
+                <textarea
+                rows="4"
+                class="border-2 p-2 rounded-lg"
+                placeholder="Escrever algo"
+                ></textarea>
+            </label>
+            <button href="/publish" class="bg-blue-500 p-2 rounded-lg flex-row text-white items-center gap-1 justify-center max-w-xs">
+                <i class="fa-solid fa-paper-plane"></i>
+                Publicar
+            </button>
+        </div>
+    </form>
+{% endblock %}
