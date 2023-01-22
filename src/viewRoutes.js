@@ -15,3 +15,7 @@ routes.get("/", async (req, res) => {
   let posts = await getPosts();
   res.render("pages/index", { posts });
 });
+
+routes.use(async (req, res) => {
+  res.render("pages/notFound");
+});

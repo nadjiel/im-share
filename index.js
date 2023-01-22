@@ -1,6 +1,6 @@
-import cors from "cors"
-import express from "express"
-import nunjucks from 'nunjucks'
+import cors from "cors";
+import express from "express";
+import nunjucks from "nunjucks";
 import { apiRoutes } from "./src/apiRoutes.js";
 import { viewRoutes } from "./src/viewRoutes.js";
 
@@ -11,14 +11,10 @@ const errorHandling = (err, req, res, next) => {
   });
 };
 
-function notFoundFallback(req, res, next) {
-  res.status(404).sendFile('public/404.html', { root: '.' });
-}
+const app = express();
 
-const app = express()
-
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cors());
 
 app.set("view engine", "njk");
 nunjucks.configure("src/views", {
@@ -27,14 +23,15 @@ nunjucks.configure("src/views", {
   autoescape: true,
 });
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 
-app.use('/api/v1', apiRoutes)
-app.use(viewRoutes)
+app.use("/api/v1", apiRoutes);
+app.use(viewRoutes);
 
-app.use(notFoundFallback)
 app.use(errorHandling);
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
-app.listen(port, () => console.log(`Aplicação rodando em http://localhost:${port}`))
+app.listen(port, () =>
+  console.log(`Aplicação rodando em http://localhost:${port}`)
+);
