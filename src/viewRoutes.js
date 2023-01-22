@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getPosts } from "./controller/Post.js";
+import { generateUploadURL } from "./images/s3.js";
 import { getUserByUsername } from "./user/services/getUserByUsername.js";
 
 const routes = Router();
@@ -12,7 +13,8 @@ routes.get("/@:username", async (req, res) => {
 });
 
 routes.get("/publish", async (req, res) => {
-  res.render("pages/publish");
+  const uploadUrl = await generateUploadURL();
+  res.render("pages/publish", { uploadUrl });
 });
 
 routes.get("/", async (req, res) => {
