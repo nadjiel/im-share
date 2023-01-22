@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as cache from "./controller/Cache.js";
 import * as usersController from "./controller/User.js";
-import * as photosController from "./controller/Photo.js";
+import * as postsController from "./controller/Post.js";
 import * as authenticate from "./controller/Authenticate.js";
 
 const routes = Router();
@@ -41,35 +41,35 @@ routes
   );
 
 routes
-  .route("/photos")
-  .post(authenticate.isAuthenticated, photosController.create)
-  .get(authenticate.isAuthenticated, photosController.getPhotos);
+  .route("/posts")
+  .post(authenticate.isAuthenticated, postsController.create)
+  .get(authenticate.isAuthenticated, postsController.getPosts);
 
 routes
-  .route("/photos/:id")
+  .route("/posts/:id")
   .get(
     authenticate.isAuthenticated,
-    photosController.defineResLocals,
+    postsController.defineResLocals,
     cache.getData,
-    photosController.getPhotoForId,
+    postsController.getPostForId,
     cache.setData
   )
   .put(
     authenticate.isAuthenticated,
-    photosController.defineResLocals,
-    photosController.update,
+    postsController.defineResLocals,
+    postsController.update,
     cache.setData
   )
   .patch(
     authenticate.isAuthenticated,
-    photosController.defineResLocals,
-    photosController.update,
+    postsController.defineResLocals,
+    postsController.update,
     cache.setData
   )
   .delete(
     authenticate.isAuthenticated,
-    photosController.defineResLocals,
-    photosController.remove,
+    postsController.defineResLocals,
+    postsController.remove,
     cache.delData
   );
 
