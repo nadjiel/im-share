@@ -39,7 +39,7 @@ export async function authenticate(req, res, next) {
         where: { username }
     })
 
-    const error = "Usuario ou senha incorretos"
+    const error = "Usuário ou senha incorretos"
 
     if (!userExists) {
         return res.status(400).json({ error })
@@ -64,7 +64,7 @@ export async function refreshToken(req, res, next) {
 
     if (!refresh) {
         return res.status(400).json({
-            error: "É nescessario passar o refresh token para renovar o access"
+            error: "É necessário passar o refresh token para renovar o access"
         })
     }
 

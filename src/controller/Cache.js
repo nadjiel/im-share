@@ -41,7 +41,7 @@ export async function delData(req, res, next) {
         const { table } = res.locals
 
         await redis.del(`${table}_${id}`)
-        res.status(204).send("Excluido com sucesso")
+        res.status(204).send("Excluído com sucesso")
     } catch (err) {
         next(err)
     }
