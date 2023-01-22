@@ -7,8 +7,11 @@
 {% endblock %}
 
 {% block content %}
+    <section>
+        {{user.name}}
+    </section>
     <section id="posts">
-        {% for post in user.posts %}
+        {% for post in user.photos %}
             {% include "../components/_post.njk" %}
         {% endfor %}
         {% for comentarios in user.comentarios %}
@@ -17,6 +20,4 @@
     </section>
 {% endblock %}
 
-{% block script %}
-    
-{% endblock %}
+{% block script %}{% endblock %}
