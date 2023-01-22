@@ -1,7 +1,7 @@
 const prisma = require("../database/PrismaClient")
 const redis = require("../database/redis")
 
-const setPessoa = async (req, res, next) => {
+const setData = async (req, res, next) => {
     try {
         const { id } = req.params
         const { table } = res.locals
@@ -20,7 +20,7 @@ const setPessoa = async (req, res, next) => {
     }
 }
 
-const getPessoa = async (req, res, next) => {
+const getData = async (req, res, next) => {
     try {
         const { id } = req.params
         const { table } = res.locals
@@ -35,7 +35,7 @@ const getPessoa = async (req, res, next) => {
 }
 
 
-const delPessoa = async (req, res, next) => {
+const delData = async (req, res, next) => {
     try {
         const { id } = req.params
         const { table } = res.locals
@@ -47,4 +47,4 @@ const delPessoa = async (req, res, next) => {
     }
 }
 
-module.exports = { setPessoa, getPessoa, delPessoa }
+module.exports = { setData, getData, delData }

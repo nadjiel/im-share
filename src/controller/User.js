@@ -1,13 +1,6 @@
-const validateUuid = require('uuid-validate');
-const bcrypt = require('bcrypt')
-
+const hashPassword = require("../services/hashPassword")
 const prisma = require("../database/PrismaClient")
-
-const hashPassword = async (password) => {
-    const saltRounds = 10
-    const hash = await bcrypt.hash(password, saltRounds)
-    return await hash
-}
+const verifyUUID = require("../services/verifyID")
 
 const verifyFieldsUnique = async (verify, idUpdate = null) => {
     const userCurrent = await prisma.user.findFirst({
@@ -23,15 +16,6 @@ const verifyFieldsUnique = async (verify, idUpdate = null) => {
             throw new Error("Esse username já pertence a algum usuario")
     }
 } 
-
-const verifyUUID = (id) => {
-    const mensage = "O id enviado não é um UUID"
-    
-    if (!id) return
-
-    if (validateUuid(id)) return true
-    else throw new Error(mensage)
-}
 
 const defineResLocals = (req, res, next) => {
     res.locals.table = "user"
@@ -63,7 +47,7 @@ const getUserForId = async (req, res, next) => {
     }
 }
 
-const createUser = async (req, res, next) => {
+const create = async (req, res, next) => {
     try {
         const { id, name, email, username, password, photo_profile } = req.body
 
@@ -86,7 +70,7 @@ const createUser = async (req, res, next) => {
     }
 }
 
-async function updateUser(req, res, next) {
+const update = async (req, res, next) => {
     try {
         const { id } = req.params
         const { name, email, username, 
@@ -100,9 +84,8 @@ async function updateUser(req, res, next) {
         if (photo_profile) updates.photo_profile = photo_profile
         if (password) updates.password = await hashPassword(password)
     
-        if (Object.keys(updates).length === 0) {
+        if (Object.keys(updates).length === 0)
             throw new Error("Sem campos de update.")
-        }
 
         await verifyFieldsUnique({ email, username }, id)
     
@@ -117,7 +100,7 @@ async function updateUser(req, res, next) {
     }
 }
 
-async function deleteUser(req, res, next) {
+const delet = async (req, res, next) => {
     try {
         const { id } = req.params
 
@@ -135,4 +118,4 @@ async function deleteUser(req, res, next) {
     }
 }
 
-module.exports = { getAllUsers, getUserForId, createUser, updateUser, deleteUser, defineResLocals }
+module.exports = { getAllUsers, getUserForId, create, update, delet, defineResLocals }
