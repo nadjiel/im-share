@@ -1,6 +1,6 @@
-import { createHash } from "../services/createHash.js"
-import { prisma } from "../database/PrismaClient.js"
+import { prisma } from "../database/prisma.js"
 import { verifyUUID } from "../services/verifyID.js"
+import { createHash } from "../services/createHash.js"
 
 async function verifyFieldsUnique(verify, idUpdate = null) {
     const userCurrent = await prisma.user.findFirst({

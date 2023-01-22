@@ -1,8 +1,7 @@
 import express from "express"
 import cors from "cors"
-import path from 'path'
-
-import { router } from "./src/router.js"
+import nunjucks from 'nunjucks'
+import { apiRoutes } from "./src/apiRoutes.js";
 
 const errorHandling = (err, req, res, next) => {
   res.status(500).json({
@@ -19,7 +18,14 @@ const app = express()
 
 app.use(express.json())
 app.use(cors())
-app.use(router)
+app.use('/api/v1', apiRoutes)
+
+app.set("view engine", "njk");
+nunjucks.configure("views", {
+  express: app,
+  noCache: true,
+  autoescape: true,
+});
 
 app.use(express.static('public'));
 

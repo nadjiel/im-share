@@ -1,4 +1,4 @@
-import { prisma } from "../database/PrismaClient.js"
+import { prisma } from "../database/prisma.js"
 import { verifyUUID } from "../services/verifyID.js"
 
 async function verifyUserId(userId) {

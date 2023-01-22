@@ -4,15 +4,15 @@ import * as usersController from "./controller/User.js"
 import * as photosController from "./controller/Photo.js"
 import * as authenticate from "./controller/Authenticate.js"
 
-export const router = express.Router()
+const routes = express.Router()
 
-router.post("/api/v1/login", authenticate.authenticate)
-router.post("/api/v1/refresh_token", authenticate.refreshToken)
+routes.post("/login", authenticate.authenticate)
+routes.post("/refresh_token", authenticate.refreshToken)
 
-router.post("/api/v1/users", usersController.create)
-router.get("/api/v1/users", authenticate.isAuthenticated, usersController.getAllUsers)
+routes.post("/users", usersController.create)
+routes.get("/users", authenticate.isAuthenticated, usersController.getAllUsers)
 
-router.route("/api/v1/users/:id")
+routes.route("/users/:id")
     .get(
         authenticate.isAuthenticated,
         usersController.defineResLocals,
@@ -39,11 +39,11 @@ router.route("/api/v1/users/:id")
         cache.delData
     )
 
-router.route("/api/v1/photos")
+routes.route("/photos")
     .post(authenticate.isAuthenticated, photosController.create)
     .get(authenticate.isAuthenticated, photosController.getPhotos)
 
-router.route("/api/v1/photos/:id")
+routes.route("/photos/:id")
     .get(
         authenticate.isAuthenticated,
         photosController.defineResLocals,
@@ -69,3 +69,5 @@ router.route("/api/v1/photos/:id")
         photosController.remove,
         cache.delData
     )
+
+export const apiRoutes = routes

@@ -1,4 +1,4 @@
-import { prisma } from "../database/PrismaClient.js"
+import { prisma } from "../database/prisma.js"
 import { redis } from "../database/redis.js"
 
 export async function setData(req, res, next) {

@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 import duration from 'dayjs/plugin/duration.js'
-import { prisma } from "../database/PrismaClient.js"
+import { prisma } from "../database/prisma.js"
 
 const key_private = process.env.KEY_JWT
 
