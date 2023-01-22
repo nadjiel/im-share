@@ -4,8 +4,8 @@
             <a class="link-perfil" href="username">
                 <img class="foto-perfil" src="imgs/foto-perfil.jpg"/>
             </a>
-            <a class="link-perfil" href="username">
-                <h2 class="nome-autor">Nome do autor</h2>
+            <a class="link-perfil" href="/@{{post.user.username}}">
+                <h2 class="nome-autor">{{post.user.name}}</h2>
             </a>
         </div>
         <span class="data-post">Data</span>
@@ -22,9 +22,7 @@
                 class="input-comentario"
                 type="text"
                 name="text"
-                placeholder="O que achou?"
-            />
-
+                placeholder="O que achou?"/>
             <button class="submit-comentario" type="submit"></button>
         </form>
         <button class="ver-comentarios"></button>

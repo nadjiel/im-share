@@ -25,10 +25,11 @@ export const defineResLocals = (req, res, next) => {
 }
 
 export async function getPhotos(req, res, next) {
-    const response = await prisma.photo.findMany({
-        orderBy: { createdAt: "desc" }
+    const photos = await prisma.photo.findMany({
+        orderBy: { createdAt: "desc" },
+        include: { user: true }
     })
-    res.json(await response)
+    return photos
 }
 
 export async function getPhotoForId(req, res, next) {
