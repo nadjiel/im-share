@@ -31,6 +31,7 @@ model Post {
   id          String    @id @default(uuid())
   description String
   userId      String
+  image       String
   user        User      @relation(fields: [userId], references: [id])
   like        Like[]    @relation()
   comments    Comment[] @relation()
