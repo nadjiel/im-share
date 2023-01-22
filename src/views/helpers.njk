@@ -1,0 +1,3 @@
+{% macro formatDate(date) %}
+    {{ date.split and date.split('-').reverse().join('/') or date }}
+{% endmacro %}
