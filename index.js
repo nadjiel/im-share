@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import nunjucks from 'nunjucks'
 import { apiRoutes } from "./src/apiRoutes.js";
+import { viewRoutes } from "./src/viewRoutes.js";
 
 const errorHandling = (err, req, res, next) => {
   res.status(500).json({
@@ -18,16 +19,18 @@ const app = express()
 
 app.use(express.json())
 app.use(cors())
-app.use('/api/v1', apiRoutes)
 
 app.set("view engine", "njk");
-nunjucks.configure("views", {
+nunjucks.configure("src/views", {
   express: app,
   noCache: true,
   autoescape: true,
 });
 
 app.use(express.static('public'));
+
+app.use('/api/v1', apiRoutes)
+app.use(viewRoutes)
 
 app.use(notFoundFallback)
 app.use(errorHandling);

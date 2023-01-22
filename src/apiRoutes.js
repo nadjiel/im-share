@@ -1,10 +1,10 @@
-import express from "express"
+import { Router } from "express"
 import * as cache from "./controller/Cache.js"
 import * as usersController from "./controller/User.js"
 import * as photosController from "./controller/Photo.js"
 import * as authenticate from "./controller/Authenticate.js"
 
-const routes = express.Router()
+const routes = Router()
 
 routes.post("/login", authenticate.authenticate)
 routes.post("/refresh_token", authenticate.refreshToken)
