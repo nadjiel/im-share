@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    container_name: social_pg
+    env_file:
+      - .env
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+
