@@ -1,6 +1,6 @@
-const validateUuid = require('uuid-validate');
+import validateUuid from 'uuid-validate';
 
-const verifyUUID = (id) => {
+export function verifyUUID(id) {
     const mensage = "O id enviado não é um UUID"
 
     if (!id) return
@@ -8,5 +8,3 @@ const verifyUUID = (id) => {
     if (validateUuid(id)) return true
     else throw new Error(mensage)
 }
-
-module.exports = verifyUUID

@@ -1,7 +1,7 @@
-const prisma = require("../database/PrismaClient")
-const verifyUUID = require("../services/verifyID")
+import { prisma } from "../database/PrismaClient.js"
+import { verifyUUID } from "../services/verifyID.js"
 
-const verifyUserId = async (userId) => {
+async function verifyUserId(userId) {
     const user = await prisma.user.findUnique({
         where: { id: userId }
     })
@@ -9,7 +9,7 @@ const verifyUserId = async (userId) => {
     return user !== null
 }
 
-const verifyFieldsUnique = async (id) => {
+async function verifyFieldsUnique(id) {
     const photo = await prisma.photo.findFirst({
         where: { id }
     })
@@ -19,19 +19,19 @@ const verifyFieldsUnique = async (id) => {
 
 }
 
-const defineResLocals = (req, res, next) => {
+export const defineResLocals = (req, res, next) => {
     res.locals.table = "photo"
     next()
 }
 
-const getPhotos = async (req, res, next) => {
+export async function getPhotos(req, res, next) {
     const response = await prisma.photo.findMany({
         orderBy: { createdAt: "desc" }
     })
     res.json(await response)
 }
 
-const getPhotoForId = async (req, res, next) => {
+export async function getPhotoForId(req, res, next) {
     try {
         const { id } = req.params
 
@@ -46,7 +46,7 @@ const getPhotoForId = async (req, res, next) => {
     }
 }
 
-const create = async (req, res, next) => {
+export async function create(req, res, next) {
     try {
         const { id, userId } = req.body
 
@@ -71,7 +71,7 @@ const create = async (req, res, next) => {
     }
 }
 
-const update = async (req, res, next) => {
+export async function update(req, res, next) {
     try {
         const { id } = req.params
         const { userId } = req.body
@@ -94,7 +94,7 @@ const update = async (req, res, next) => {
     }
 }
 
-const delet = async (req, res, next) => {
+export async function remove(req, res, next) {
     try {
         const { id } = req.params
 
@@ -111,5 +111,3 @@ const delet = async (req, res, next) => {
         next(err)
     }
 }
-
-module.exports = { getPhotos, getPhotoForId, create, update, delet, defineResLocals }

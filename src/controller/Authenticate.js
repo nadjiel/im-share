@@ -1,9 +1,9 @@
-const dayjs = require('dayjs')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+import dayjs from 'dayjs'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
-const duration = require('dayjs/plugin/duration')
-const prisma = require("../database/PrismaClient")
+import duration from 'dayjs/plugin/duration.js'
+import { prisma } from "../database/PrismaClient.js"
 
 const key_private = process.env.KEY_JWT
 
@@ -20,7 +20,7 @@ const generatedToken = (id, expiresIn) => {
     return token
 }
 
-const savedTokenInBd = async (token, userId) => {
+async function savedTokenInBd(token, userId) {
     const expires = dayjs().add(365, "day").unix()
 
     await prisma.refreshToken.deleteMany({
@@ -32,7 +32,7 @@ const savedTokenInBd = async (token, userId) => {
     })
 }
 
-const authenticate = async (req, res, next) => {
+export async function authenticate(req, res, next) {
     const { username, password } = req.body
 
     const userExists = await prisma.user.findFirst({
@@ -59,7 +59,7 @@ const authenticate = async (req, res, next) => {
     res.status(201).json({ refresh, access })
 }
 
-const refreshToken = async (req, res, next) => {
+export async function refreshToken(req, res, next) {
     const { refresh } = req.body
 
     if (!refresh) {
@@ -86,7 +86,7 @@ const refreshToken = async (req, res, next) => {
     res.status(201).json({ access })
 }
 
-const isAuthenticated = async (req, res, next) => {
+export async function isAuthenticated(req, res, next) {
     const authToken = req.headers.authorization
 
     if (!authToken) {
@@ -106,5 +106,3 @@ const isAuthenticated = async (req, res, next) => {
         })
     }
 }
-
-module.exports = { authenticate, isAuthenticated, refreshToken }

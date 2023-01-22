@@ -1,12 +1,10 @@
-const express = require("express")
+import express from "express"
+import * as cache from "./controller/Cache.js"
+import * as usersController from "./controller/User.js"
+import * as photosController from "./controller/Photo.js"
+import * as authenticate from "./controller/Authenticate.js"
 
-const photosController = require("./controller/Photo")
-const usersController = require("./controller/User")
-
-const authenticate = require("./controller/Authenticate")
-const cache = require("./controller/Cache")
-
-const router = express.Router()
+export const router = express.Router()
 
 router.post("/api/v1/login", authenticate.authenticate)
 router.post("/api/v1/refresh_token", authenticate.refreshToken)
@@ -16,28 +14,28 @@ router.get("/api/v1/users", authenticate.isAuthenticated, usersController.getAll
 
 router.route("/api/v1/users/:id")
     .get(
-        authenticate.isAuthenticated, 
+        authenticate.isAuthenticated,
         usersController.defineResLocals,
-        cache.getData, 
-        usersController.getUserForId, 
+        cache.getData,
+        usersController.getUserForId,
         cache.setData
     )
     .put(
-        authenticate.isAuthenticated, 
+        authenticate.isAuthenticated,
         usersController.defineResLocals,
-        usersController.update, 
+        usersController.update,
         cache.setData
     )
     .patch(
-        authenticate.isAuthenticated, 
+        authenticate.isAuthenticated,
         usersController.defineResLocals,
-        usersController.update, 
+        usersController.update,
         cache.setData
     )
     .delete(
-        authenticate.isAuthenticated, 
+        authenticate.isAuthenticated,
         usersController.defineResLocals,
-        usersController.delet, 
+        usersController.remove,
         cache.delData
     )
 
@@ -47,29 +45,27 @@ router.route("/api/v1/photos")
 
 router.route("/api/v1/photos/:id")
     .get(
-        authenticate.isAuthenticated, 
+        authenticate.isAuthenticated,
         photosController.defineResLocals,
-        cache.getData, 
-        photosController.getPhotoForId, 
+        cache.getData,
+        photosController.getPhotoForId,
         cache.setData
     )
     .put(
-        authenticate.isAuthenticated, 
+        authenticate.isAuthenticated,
         photosController.defineResLocals,
-        photosController.update, 
+        photosController.update,
         cache.setData
     )
     .patch(
-        authenticate.isAuthenticated, 
+        authenticate.isAuthenticated,
         photosController.defineResLocals,
-        photosController.update, 
+        photosController.update,
         cache.setData
     )
     .delete(
-        authenticate.isAuthenticated, 
+        authenticate.isAuthenticated,
         photosController.defineResLocals,
-        photosController.delet, 
+        photosController.remove,
         cache.delData
     )
-
-module.exports = router
