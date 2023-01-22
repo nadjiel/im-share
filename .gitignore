@@ -116,8 +116,7 @@ typescript/**/migrations/
 misc/**/migrations/
 databases/**/migrations/
 experimental/**/*.db
-.next
-.vscode/
+.Next
 .nuxt
 dev.db
 *.env*
