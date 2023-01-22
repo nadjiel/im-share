@@ -13,16 +13,5 @@ routes.get("/@:username", async (req, res) => {
 
 routes.get("/", async (req, res) => {
   let posts = await getPosts();
-  posts = [
-    ...posts,
-    ...posts,
-    ...posts,
-    ...posts,
-    ...posts,
-    ...posts,
-    ...posts,
-    ...posts,
-    ...posts,
-  ];
   res.render("pages/index", { posts });
 });
