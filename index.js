@@ -1,5 +1,5 @@
-import express from "express"
 import cors from "cors"
+import express from "express"
 import nunjucks from 'nunjucks'
 import { apiRoutes } from "./src/apiRoutes.js";
 import { viewRoutes } from "./src/viewRoutes.js";
