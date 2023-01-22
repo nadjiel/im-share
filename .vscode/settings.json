@@ -3,5 +3,8 @@
     "editor.formatOnSave": true,
     "cSpell.words": [
         "dayjs"
-    ]
+    ],
+    "tailwindCSS.includeLanguages": {
+        "Nunjucks": "html"
+    }
 }

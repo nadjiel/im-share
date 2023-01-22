@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ title }}</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" type="text/css" href="./css/index.css"/>
 
-    <link rel="stylesheet" type="text/css" href="./css/index.css"/>
+        {% block style %}{% endblock %}
+    </head>
+    <body>
+        {% include "components/_menu.njk" %}
 
-    {% block style %}
-    {% endblock %}
-</head>
-<body>
-    {% include "components/_menu.njk" %}
+        {% block content %}{% endblock %}
 
-    {% block content %}
-    {% endblock %}
-
-    {% block script %}
-    {% endblock %}
-</body>
+        {% block script %}{% endblock %}
+    </body>
 </html>
