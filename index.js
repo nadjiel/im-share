@@ -11,7 +11,7 @@ const errorHandling = (err, req, res, next) => {
   });
 };
 
-const error404 = (req, res, next) => {
+function notFoundFallback(req, res, next) {
   res.status(404).sendFile('public/404.html', { root: '.' });
 }
 
@@ -23,7 +23,7 @@ app.use(router)
 
 app.use(express.static('public'));
 
-app.use(error404)
+app.use(notFoundFallback)
 app.use(errorHandling);
 
 const port = process.env.PORT || 3000
