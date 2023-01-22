@@ -28,4 +28,4 @@ app.use(errorHandling);
 
 const port = process.env.PORT || 3000
 
-app.listen(port, () => console.log(`Aplicação rodando na porta ${port}`))
+app.listen(port, () => console.log(`Aplicação rodando em http://localhost:${port}`))
