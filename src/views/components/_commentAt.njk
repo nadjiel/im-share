@@ -2,14 +2,14 @@
     <span class="aviso-post">{{comment.user.name}} comentou em:</span>
     {% set post = comment.post %}
     {%include "./_post.njk" %}
-    <div class="mt-2">
+    <div class="mt-2 flex-row items-center gap-2">
         <a class="flex-row items-center gap-2" href="/@{{comment.user.username}}">
             <img 
                 width="50"
                 height="50"
                 class="rounded-full"
                 src="imgs/foto-perfil.jpg"/>
-            <h2 class="text-lg">{{comment.user.name}}</h2>
         </a>
+        <div>{{comment.text}}</div>
     </div>
 </article>

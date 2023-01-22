@@ -28,25 +28,27 @@ model User {
 }
 
 model Post {
-  id        String    @id @default(uuid())
-  user      User      @relation(fields: [userId], references: [id])
-  userId    String
-  comments  Comment[] @relation()
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  like      Like[]    @relation()
+  id          String    @id @default(uuid())
+  description String
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  like        Like[]    @relation()
+  comments    Comment[] @relation()
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   @@map("posts")
 }
 
 model Comment {
   id         String   @id @default(uuid())
+  text       String
+  userId     String
+  postId     String
+  responseId String
   user       User     @relation(fields: [userId], references: [id], name: "user")
   post       Post     @relation(fields: [postId], references: [id])
   response   User     @relation(fields: [responseId], references: [id], name: "userResponse")
-  postId     String
-  userId     String
-  responseId String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
