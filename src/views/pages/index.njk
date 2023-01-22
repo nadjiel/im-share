@@ -3,11 +3,7 @@
 {% set title = "Página Inicial" %}
 
 {% block content %}
-    <section id="posts">
-        {% for post in posts %}
-            {% include "../components/_post.njk" %}
-        {% endfor %}
-    </section>
+    {% include "../components/_postList.njk" %}
 {% endblock %}
 
 {{ posts }}

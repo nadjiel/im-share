@@ -10,7 +10,7 @@
         {% for post in user.posts %}
             {% include "../components/_post.njk" %}
         {% endfor %}
-        {% for comentarios in user.comentarios %}
+        {% for comment in user.comments %}
             {% include "../components/_comentario.njk" %}
         {% endfor %}
     </section>
