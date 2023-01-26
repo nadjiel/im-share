@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { getPosts } from "./controller/Post.js";
-import { generateUploadURL } from "./images/s3.js";
 import { getUserByUsername } from "./user/services/getUserByUsername.js";
 
 const routes = Router();
