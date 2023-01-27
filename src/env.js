@@ -2,6 +2,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const {
+  JWT_KEY,
+
   POSTGRES_DB,
   POSTGRES_USER,
   POSTGRES_PASSWORD,
