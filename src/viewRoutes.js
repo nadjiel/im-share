@@ -12,8 +12,7 @@ routes.get("/@:username", async (req, res) => {
 });
 
 routes.get("/publish", async (req, res) => {
-  const uploadUrl = await generateUploadURL();
-  res.render("pages/publish", { uploadUrl });
+  res.render("pages/publish");
 });
 
 routes.get("/", async (req, res) => {
