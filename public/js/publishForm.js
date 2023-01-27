@@ -31,8 +31,8 @@ async function handleSubmit(e) {
 
   // send the image info back to our server
   const photoData = {
-    public_id: cloudinaryResponse.data.public_id,
     version: cloudinaryResponse.data.version,
+    public_id: cloudinaryResponse.data.public_id,
     signature: cloudinaryResponse.data.signature,
   };
 
