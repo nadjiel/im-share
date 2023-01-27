@@ -1,6 +1,5 @@
-import { v2 } from "cloudinary";
+import "./configUpload.js";
 import { Router } from "express";
-import { clConfig } from "./clConfig.js";
 
 const router = Router();
 export const uploadController = router;
