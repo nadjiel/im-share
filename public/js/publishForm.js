@@ -1,8 +1,22 @@
 const cloudName = "dlwoimstk";
 const apiKey = "378278351497316";
 
-function handleUploadProgress(e) {
-  console.log(e.loaded / e.total);
+const fileInput = document.querySelector("#file-field");
+const uploadForm = document.querySelector("#upload-form");
+const imageDisplay = document.querySelector("#image-display");
+const imagePlaceholder = document.querySelector("#image-placeholder");
+
+uploadForm.addEventListener("submit", handleSubmit);
+fileInput.addEventListener("change", handleFileChange);
+
+function handleFileChange(e) {
+  const file = e.srcElement.files[0];
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    imagePlaceholder.remove();
+    imageDisplay.src = reader.result;
+  };
+  reader.readAsDataURL(file);
 }
 
 async function handleSubmit(e) {
@@ -14,7 +28,7 @@ async function handleSubmit(e) {
   console.log(signatureResponse);
 
   const data = new FormData();
-  data.append("file", document.querySelector("#file-field").files[0]);
+  data.append("file", fileInput.files[0]);
   data.append("api_key", apiKey);
   data.append("signature", signatureResponse.data.signature);
   data.append("timestamp", signatureResponse.data.timestamp);
@@ -39,4 +53,6 @@ async function handleSubmit(e) {
   axios.post("/do-something-with-photo", photoData);
 }
 
-document.querySelector("#upload-form").addEventListener("submit", handleSubmit);
+function handleUploadProgress(e) {
+  console.log(e.loaded / e.total);
+}

@@ -3,14 +3,22 @@
 {% set title = "Publicar" %}
 {% block content %}
     <form class='flex-row flex-1' id="upload-form">
-        <div class="bg-gray-300 flex-1 flex-col items-center justify-center gap-2 text-2xl">
-            <i class="fa-regular fa-image"></i>
-            Adicionar imagem
+        <label class="bg-gray-300 flex-1 flex-col items-center justify-center cursor-pointer relative rounded-lg">
+            <div 
+                id="image-placeholder"
+                class="gap-2 text-2xl justify-center items-center">
+                <i class="fa-regular fa-image"></i>
+                <span>Adicionar imagem</span>
+            </div>
             <input 
+                hidden
                 type='file'
                 id='file-field'
                 accept="image/gif, image/jpeg, image/png, image/webp"></input>
-        </div>
+            <img 
+                id="image-display"
+                class="absolute max-w-full max-h-full w-auto h-auto"></img>
+        </label>
         <div class="flex-1 p-4 gap-2">
             <label>Descrição
                 <textarea
