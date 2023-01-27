@@ -9,13 +9,13 @@ datasource db {
 
 model User {
   id               String         @id @default(uuid())
-  username         String         @unique
-  email            String         @unique
   name             String
-  password         String
+  email            String         @unique
   picture          String         @default("img/profile_default.jpg")
-  createdAt        DateTime       @default(now())
+  username         String         @unique
+  password         String
   updatedAt        DateTime       @updatedAt
+  createdAt        DateTime       @default(now())
   posts            Post[]         @relation()
   comments         Comment[]      @relation("user")
   responseComments Comment[]      @relation("userResponse")

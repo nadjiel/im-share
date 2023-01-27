@@ -2,21 +2,6 @@ import { prisma } from "../database/prisma.js";
 import { verifyUUID } from "../utils/verifyID.js";
 import { createHash } from "../services/createHash.js";
 
-async function verifyFieldsUnique(verify, idUpdate = null) {
-  const userCurrent = await prisma.user.findFirst({
-    where: verify,
-  });
-
-  if (userCurrent && userCurrent?.id !== idUpdate) {
-    if (userCurrent.id === verify.id)
-      throw new Error("Esse ID entra em conflito a outro id de usuário");
-    if (userCurrent.email === verify.email)
-      throw new Error("Esse Email já está em uso");
-    if (userCurrent.username === verify.username)
-      throw new Error("Esse username já pertence a algum usuário");
-  }
-}
-
 export const defineResLocals = (req, res, next) => {
   res.locals.table = "user";
   next();
