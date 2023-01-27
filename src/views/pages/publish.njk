@@ -2,10 +2,11 @@
 {% extends "../layout.njk" %}
 {% set title = "Publicar" %}
 {% block content %}
-    <form class='flex-row flex-1'>
+    <form class='flex-row flex-1' id="upload-form">
         <div class="bg-gray-300 flex-1 flex-col items-center justify-center gap-2 text-2xl">
             <i class="fa-regular fa-image"></i>
             Adicionar imagem
+            <input type='file' id='file-field'></input>
         </div>
         <div class="flex-1 p-4 gap-2">
             <label>Descrição
@@ -21,4 +22,6 @@
             </button>
         </div>
     </form>
+    <script src="js/publishForm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% endblock %}

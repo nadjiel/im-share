@@ -9,7 +9,7 @@ const routes = Router();
 
 routes.post("/login", authController);
 
-routes.use(isAuthenticated);
+// routes.use(isAuthenticated);
 routes.use("/users", userRouter);
 routes.use("/posts", postController);
 routes.use("/upload", uploadController);

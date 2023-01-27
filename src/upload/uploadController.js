@@ -1,5 +1,6 @@
 import "./configUpload.js";
 import { Router } from "express";
+import { getSignature } from "./getSignature.js";
 
 const router = Router();
 export const uploadController = router;

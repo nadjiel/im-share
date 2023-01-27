@@ -1,5 +1,5 @@
 import { v2 } from "cloudinary";
-import { CLOUDINARY_SECRET } from "../env";
+import { CLOUDINARY_SECRET } from "../env.js";
 
 export function getSignature() {
   const timestamp = Math.round(new Date().getTime() / 1000);

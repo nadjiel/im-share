@@ -21,5 +21,5 @@ routes.get("/", async (req, res) => {
 });
 
 routes.use(async (req, res) => {
-  res.render("pages/notFound");
+  res.status(404).render("pages/notFound");
 });
