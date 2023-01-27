@@ -1,4 +1,4 @@
-import { clConfig } from "./clConfig";
+import { clConfig } from "../services/clConfig";
 import { v2 } from "cloudinary";
 
 export function getSignature() {
