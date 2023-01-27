@@ -1,25 +1,8 @@
 import { Router } from "express";
 import { prisma } from "../database/prisma.js";
-import { verifyUUID } from "../utils/verifyID.js";
 
 const router = Router();
 export const postController = router;
-
-async function verifyUserId(userId) {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-  });
-
-  return user !== null;
-}
-
-async function verifyFieldsUnique(id) {
-  const post = await prisma.post.findFirst({
-    where: { id },
-  });
-
-  if (post !== null) throw new Error("Esse ID já está vinculado a outra foto");
-}
 
 router.get("/", async (req, res, next) => {
   const posts = await prisma.post.findMany({
@@ -36,49 +19,25 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  const { id, userId } = req.body;
-
-  await verifyFieldsUnique(id);
-
-  const create = { userId };
-
-  if (verifyUUID(id)) create.id = id;
-
-  const userExists = await verifyUserId(userId);
-
-  if (!userExists) throw new Error("ID de usuário enviado não existe");
-
-  const post = await prisma.post.create({
-    data: create,
-  });
-
+  const { description } = req.body;
+  const data = { description };
+  // todo add user id by req
+  const post = await prisma.post.create({ data });
   res.status(201).json(post);
 });
 
-export async function update(req, res, next) {
+router.patch("/:id", async (req, res, next) => {
   const { id } = req.params;
-  const { userId } = req.body;
+  const { description } = req.body;
+  const data = { description };
+  // todo add authorization
+  await prisma.post.update({ where: { id }, data });
+  res.json({ data });
+});
 
-  if (!userId) throw new Error("Sem campos de update.");
-
-  const userExists = await verifyUserId(userId);
-
-  if (!userExists) throw new Error("ID de usuário enviado não existe");
-
-  await prisma.post.update({
-    where: { id },
-    data: { userId },
-  });
-}
-
-export async function remove(req, res, next) {
+router.delete("/:id", async (req, res, next) => {
   const { id } = req.params;
-
-  const filter = { where: { id } };
-
-  const post = await prisma.post.findFirst(filter);
-
-  if (!post) throw new Error("ID de foto não existente");
-
+  const post = await prisma.post.findUniqueOrThrow({ where: { id } });
   await prisma.post.delete(filter);
-}
+  res.send();
+});
