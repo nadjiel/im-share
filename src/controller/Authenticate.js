@@ -1,9 +1,8 @@
 import dayjs from "dayjs";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import { db } from "../database/db.js";
 import duration from "dayjs/plugin/duration.js";
-import { prisma } from "../database/prisma.js";
 
 const key_private = process.env.KEY_JWT;
 
@@ -23,11 +22,11 @@ const generatedToken = (id, expiresIn) => {
 async function savedTokenInBd(token, userId) {
   const expires = dayjs().add(365, "day").unix();
 
-  await prisma.refreshToken.deleteMany({
+  await db.refreshToken.deleteMany({
     where: { userId },
   });
 
-  await prisma.refreshToken.create({
+  await db.refreshToken.create({
     data: { token, expires, userId },
   });
 }
@@ -35,7 +34,7 @@ async function savedTokenInBd(token, userId) {
 export async function authenticate(req, res, next) {
   const { username, password } = req.body;
 
-  const userExists = await prisma.user.findUnique({ where: { username } });
+  const userExists = await db.user.findUnique({ where: { username } });
 
   const error = "Usuário ou senha incorretos";
 
@@ -66,7 +65,7 @@ export async function refreshToken(req, res, next) {
     });
   }
 
-  const dataToken = await prisma.refreshToken.findFirst({
+  const dataToken = await db.refreshToken.findFirst({
     where: {
       token: refresh,
     },

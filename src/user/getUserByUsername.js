@@ -1,7 +1,7 @@
-import { prisma } from "../database/prisma.js";
+import { db } from "../database/db.js";
 
 export async function getUserByUsername(username) {
-  const user = await prisma.user.findUniqueOrThrow({
+  const user = await db.user.findUniqueOrThrow({
     where: { username },
     include: {
       posts: { include: { user: true } },
