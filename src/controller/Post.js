@@ -1,5 +1,5 @@
 import { prisma } from "../database/prisma.js";
-import { verifyUUID } from "../services/verifyID.js";
+import { verifyUUID } from "../utils/verifyID.js";
 
 async function verifyUserId(userId) {
   const user = await prisma.user.findUnique({

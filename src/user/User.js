@@ -1,5 +1,5 @@
 import { prisma } from "../database/prisma.js";
-import { verifyUUID } from "../services/verifyID.js";
+import { verifyUUID } from "../utils/verifyID.js";
 import { createHash } from "../services/createHash.js";
 
 async function verifyFieldsUnique(verify, idUpdate = null) {
@@ -49,14 +49,14 @@ export async function getUserById(req, res, next) {
 
 export async function create(req, res, next) {
   try {
-    const { id, name, email, username, password, post_profile } = req.body;
+    const { id, name, email, username, password, picture } = req.body;
 
     await verifyFieldsUnique({ id, username, email });
 
     const create = { name, email, username };
     create.password = await createHash(password);
 
-    if (post_profile) create.post_profile = post_profile;
+    if (picture) create.picture = picture;
 
     if (await verifyUUID(id)) create.id = id;
 
@@ -73,14 +73,14 @@ export async function create(req, res, next) {
 export async function update(req, res, next) {
   try {
     const { id } = req.params;
-    const { name, email, username, password, post_profile } = req.body;
+    const { name, email, username, password, picture } = req.body;
 
     const updates = {};
 
     if (name) updates.name = name;
     if (email) updates.email = email;
     if (username) updates.username = username;
-    if (post_profile) updates.post_profile = post_profile;
+    if (picture) updates.picture = picture;
     if (password) updates.password = await createHash(password);
 
     if (Object.keys(updates).length === 0)

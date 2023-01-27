@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as cache from "./controller/Cache.js";
-import * as usersController from "./controller/User.js";
+import * as usersController from "./user/User.js";
 import * as postsController from "./controller/Post.js";
 import * as authenticate from "./controller/Authenticate.js";
 

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getPosts } from "./controller/Post.js";
-import { getUserByUsername } from "./user/services/getUserByUsername.js";
+import { getUserByUsername } from "./user/getUserByUsername.js";
 
 const routes = Router();
 export const viewRoutes = routes;
