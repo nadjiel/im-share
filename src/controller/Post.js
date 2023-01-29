@@ -7,16 +7,27 @@ async function verifyFieldsUnique(id) {
   if (postExists) throw new Error("Esse ID já está vinculado a outro post");
 }
 
+async function verifyFieldsForeign(userId) {
+  const userExists = await verifyTableID(userId, "user");
+
+  if (!userExists) throw new Error("ID de usuário enviado não existe");
+}
+
 export function defineResLocals(req, res, next) {
   res.locals.table = "post";
   next();
 };
 
-export async function getAllPosts(req, res, next) {
+export async function getPosts() {
   const posts = await prisma.post.findMany({
     orderBy: { createdAt: "desc" },
     include: { user: true },
   });
+  return posts
+}
+
+export async function getAllPosts(req, res, next) {
+  const posts = await getPosts()
   res.json(posts)
 }
 
@@ -39,19 +50,15 @@ export async function create(req, res, next) {
     const { id, userId, description, image } = req.body;
 
     await verifyFieldsUnique(id);
+    await verifyFieldsForeign(userId);
 
     const create = { userId, description, image };
 
     if (await verifyUUID(id)) create.id = id;
 
-    const userExists = await verifyTableID(userId, "user");
-
-    if (!userExists) throw new Error("ID de usuário enviado não existe");
-
     const post = await prisma.post.create({
       data: create,
     });
-    console.log(post)
 
     res.status(201).json(post);
   } catch (err) {

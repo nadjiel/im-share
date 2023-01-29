@@ -2,6 +2,7 @@ import { Router } from "express";
 import * as cache from "./controller/Cache.js";
 import * as usersController from "./controller/User.js";
 import * as postsController from "./controller/Post.js";
+import * as likesController from "./controller/Like.js"
 import * as authenticate from "./controller/Authenticate.js";
 
 const routes = Router();
@@ -73,6 +74,26 @@ routes
     postsController.defineResLocals,
     postsController.remove,
     cache.delData
+  );
+
+routes
+  .post(
+    "/likes",
+    authenticate.isAuthenticated, 
+    likesController.create
+  );
+
+routes
+  .delete(
+    "/likes/:id",
+    authenticate.isAuthenticated,
+    likesController.remove,
+  );
+
+routes
+  .get(
+    "/likes/post/:id",
+    likesController.getLikeForPost,
   );
 
 export const apiRoutes = routes;
