@@ -119,4 +119,3 @@ experimental/**/*.db
 .Next
 .nuxt
 dev.db
-*.env*
