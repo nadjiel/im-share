@@ -1,6 +1,6 @@
 import { prisma } from "../database/prisma.js";
-import { verifyUUID } from "../services/verifyID.js";
 import { createHash } from "../services/createHash.js";
+import { verifyUUID, verifyTableID } from "../services/verifyID.js";
 
 async function verifyFieldsUnique(verify, idUpdate = null) {
   const userCurrent = await prisma.user.findFirst({
@@ -17,14 +17,17 @@ async function verifyFieldsUnique(verify, idUpdate = null) {
   }
 }
 
-export const defineResLocals = (req, res, next) => {
+export function defineResLocals (req, res, next) {
   res.locals.table = "user";
   next();
 };
 
 export async function getAllUsers(req, res, next) {
   try {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({
+      orderBy: { username: "desc" }
+    });
+    
     res.json(users);
   } catch (err) {
     next(err);
@@ -35,11 +38,9 @@ export async function getUserById(req, res, next) {
   try {
     const { id } = req.params;
 
-    const user = await prisma.user.findUnique({
-      where: { id },
-    });
+    const userExists = await verifyTableID(id, "user");
 
-    if (!user) throw new Error("Usuário não existente");
+    if (!userExists) throw new Error("Usuário não existente");
 
     next();
   } catch (err) {
@@ -105,7 +106,7 @@ export async function remove(req, res, next) {
 
     const filter = { where: { id } };
 
-    const user = await prisma.user.findFirst(filter);
+    const user = await prisma.user.findUnique(filter);
 
     if (!user) throw new Error("Usuário não existente");
 

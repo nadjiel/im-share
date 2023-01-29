@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getPosts } from "./controller/Post.js";
+import { getAllPosts } from "./controller/Post.js";
 import { getUserByUsername } from "./user/services/getUserByUsername.js";
 
 const routes = Router();
@@ -16,7 +16,7 @@ routes.get("/publish", async (req, res) => {
 });
 
 routes.get("/", async (req, res) => {
-  let posts = await getPosts();
+  let posts = await getAllPosts();
   res.render("pages/index", { posts });
 });
 

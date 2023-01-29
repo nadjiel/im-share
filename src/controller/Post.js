@@ -1,44 +1,34 @@
 import { prisma } from "../database/prisma.js";
-import { verifyUUID } from "../services/verifyID.js";
-
-async function verifyUserId(userId) {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-  });
-
-  return user !== null;
-}
+import { verifyUUID, verifyTableID } from "../services/verifyID.js";
 
 async function verifyFieldsUnique(id) {
-  const post = await prisma.post.findFirst({
-    where: { id },
-  });
+  const postExists = await verifyTableID(id, "post");
 
-  if (post !== null) throw new Error("Esse ID já está vinculado a outra foto");
+  if (postExists) throw new Error("Esse ID já está vinculado a outro post");
 }
 
-export const defineResLocals = (req, res, next) => {
+export function defineResLocals(req, res, next) {
   res.locals.table = "post";
   next();
 };
 
-export async function getPosts(req, res, next) {
+export async function getAllPosts(req, res, next) {
   const posts = await prisma.post.findMany({
     orderBy: { createdAt: "desc" },
     include: { user: true },
   });
-  return posts;
+  res.json(posts)
 }
 
 export async function getPostForId(req, res, next) {
   try {
     const { id } = req.params;
 
-    const post = await prisma.post.findUnique({
-      where: { id },
-    });
+    const postExists = await verifyTableID(id, "post");
 
-    if (!post) throw new Error("Post não existente");
+    if (!postExists) throw new Error("Post não existente");
+    
+    next()
   } catch (err) {
     next(err);
   }
@@ -46,21 +36,22 @@ export async function getPostForId(req, res, next) {
 
 export async function create(req, res, next) {
   try {
-    const { id, userId } = req.body;
+    const { id, userId, description, image } = req.body;
 
     await verifyFieldsUnique(id);
 
-    const create = { userId };
+    const create = { userId, description, image };
 
     if (await verifyUUID(id)) create.id = id;
 
-    const userExists = await verifyUserId(userId);
+    const userExists = await verifyTableID(userId, "user");
 
     if (!userExists) throw new Error("ID de usuário enviado não existe");
 
     const post = await prisma.post.create({
       data: create,
     });
+    console.log(post)
 
     res.status(201).json(post);
   } catch (err) {
@@ -71,17 +62,19 @@ export async function create(req, res, next) {
 export async function update(req, res, next) {
   try {
     const { id } = req.params;
-    const { userId } = req.body;
+    const { description, image } = req.body;
 
-    if (!userId) throw new Error("Sem campos de update.");
+    const updates = {}
 
-    const userExists = await verifyUserId(userId);
+    if (image) updates.image = image
+    if (description) updates.description = description
 
-    if (!userExists) throw new Error("ID de usuário enviado não existe");
+    if (Object.keys(updates).length === 0)
+      throw new Error("Sem campos de update.");
 
     await prisma.post.update({
       where: { id },
-      data: { userId },
+      data: updates,
     });
 
     next();
@@ -96,9 +89,9 @@ export async function remove(req, res, next) {
 
     const filter = { where: { id } };
 
-    const post = await prisma.post.findFirst(filter);
+    const post = await prisma.post.findUnique(filter);
 
-    if (!post) throw new Error("ID de foto não existente");
+    if (!post) throw new Error("ID do post não existente");
 
     await prisma.post.delete(filter);
 

@@ -9,8 +9,10 @@ const routes = Router();
 routes.post("/login", authenticate.authenticate);
 routes.post("/refresh_token", authenticate.refreshToken);
 
-routes.post("/users", usersController.create);
-routes.get("/users", authenticate.isAuthenticated, usersController.getAllUsers);
+routes
+  .route("/users")
+  .post(usersController.create)
+  .get(authenticate.isAuthenticated, usersController.getAllUsers);
 
 routes
   .route("/users/:id")
@@ -42,8 +44,8 @@ routes
 
 routes
   .route("/posts")
-  .post(authenticate.isAuthenticated, postsController.create)
-  .get(authenticate.isAuthenticated, postsController.getPosts);
+  .get(postsController.getAllPosts)
+  .post(authenticate.isAuthenticated, postsController.create);
 
 routes
   .route("/posts/:id")
