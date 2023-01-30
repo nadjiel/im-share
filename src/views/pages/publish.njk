@@ -8,7 +8,7 @@
     id="publish-form"
     class='md:flex-row flex-1'
     >
-    <label class="bg-gray-300 flex-1 flex-col items-center justify-center cursor-pointer relative rounded-lg">
+    <label class="bg-gray-300 flex-1 flex-col items-center justify-center cursor-pointer relative rounded-lg focus-within:outline outline-2">
       <div 
         id="image-placeholder"
         class="gap-2 text-2xl justify-center items-center">
@@ -16,10 +16,12 @@
         <span>Adicionar imagem</span>
       </div>
       <input 
-        hidden
+        required
         type='file'
         id='file-field'
-        accept="image/gif, image/jpeg, image/png, image/webp"></input>
+        accept="image/gif, image/jpeg, image/png, image/webp"
+        class="absolute inset-0 w-full h-full text-transparent text-[0rem] cursor-pointer opacity-0"
+        ></input>
       <img 
         id="image-display"
         class="absolute max-w-full max-h-full w-auto h-auto"></img>
