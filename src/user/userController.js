@@ -1,15 +1,12 @@
 import { Router } from "express";
 import { db } from "../database/db.js";
-import { createHash } from "../services/createHash.js";
 
 const router = Router();
 export const userRouter = router;
 
 router.post("/", async function (req, res) {
-  const { name, email, username, password, picture } = req.body;
-
+  const { name, email, username, picture } = req.body;
   const data = { name, email, username, picture };
-  data.password = await createHash(password);
   const user = await db.user.create({ data });
 
   res.status(201).json(user);
@@ -32,11 +29,8 @@ router.get("/:id", async function (req, res) {
 
 router.patch("/:id", async function (req, res) {
   const { id } = req.params;
-  const { name, email, username, password, picture } = req.body;
-
+  const { name, email, username, picture } = req.body;
   const data = { name, email, username, picture };
-  if (password) data.password = await createHash(password);
-
   await db.user.update({ where: { id }, data });
 });
 

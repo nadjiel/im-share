@@ -14,19 +14,11 @@ const secondInHour = dayjs.duration({ hours: 1 }).asSeconds();
 const secondInYear = dayjs.duration({ years: 1 }).asSeconds();
 
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-
+  // todo replace by sign in
+  const { username } = req.body;
   const user = await db.user.findFirstOrThrow({ where: { username } });
-
-  const passwordEqual = await bcrypt.compare(password, user.password);
-
-  if (!passwordEqual) {
-    return res.status(403).json({ error: "Usuário ou senha incorretos" });
-  }
-
   const access = generateToken(user.id, secondInHour);
   const refresh = generateToken(user.id, secondInYear);
-
   await savedTokenInBd(refresh, user.id);
   res.status(201).json({ refresh, access });
 });
