@@ -1,12 +1,18 @@
 <div class="h-10 w-full"></div>
-<nav class="w-full bg-white shadow bg-opacity-50 backdrop-blur-lg h-10 fixed top-0 flex-row items-center z-40 justify-between">
-  <a href="/" class="font-bold px-2">
+<nav class="w-full bg-white shadow bg-opacity-50 backdrop-blur-lg h-10 fixed top-0 flex-row items-center z-40 justify-end">
+  <a href="/" class="font-bold px-2 mr-auto">
     <img src="/img/logo.png" class="h-10"/>
   </a>
   {% if not hidePublish %}
     <a href="/publish" class="bg-blue-500 p-2 rounded-lg flex-row text-white items-center gap-1">
       <i class="fa-solid fa-plus"></i>
             Publicar
+    </a>
+  {% endif %}
+  {% if not hideSignIn %}
+    <a href="/sign-in" class="p-2 rounded-lg flex-row items-center gap-1">
+      <i class="fa-solid fa-user"></i>
+            Entrar
     </a>
   {% endif %}
 </nav>
