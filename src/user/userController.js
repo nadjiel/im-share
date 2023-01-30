@@ -16,7 +16,9 @@ router.post("/", async function (req, res) {
 });
 
 router.get("/", async function (req, res) {
-  const users = await db.user.findMany();
+  const users = await db.user.findMany({
+    orderBy: { username: "desc" },
+  });
   res.json(users);
 });
 
@@ -40,8 +42,7 @@ router.patch("/:id", async function (req, res) {
 
 router.delete("/:id", async function (req, res) {
   const { id } = req.params;
-  const user = await db.user.findFirst({ where: { id } });
-  if (!user) throw new Error("Usuário não existente");
+  const user = await db.user.findUniqueOrThrow({ where: { id } });
   // todo add authorization
-  await db.user.delete(filter);
+  await db.user.delete({ where: { id } });
 });
