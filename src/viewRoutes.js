@@ -8,6 +8,10 @@ import { getUserByUsername } from "./user/getUserByUsername.js";
 const routes = Router();
 export const viewRoutes = routes;
 
+routes.get("/sign-in", async (req, res) => {
+  res.render("pages/signIn");
+});
+
 routes.get("/@:username", async (req, res) => {
   const { username } = req.params;
   const user = await getUserByUsername(username);
