@@ -1,15 +1,15 @@
 <article class="post">
-    <span class="aviso-post">{{comment.user.name}} comentou em:</span>
-    {% set post = comment.post %}
-    {%include "./_post.njk" %}
-    <div class="mt-2 flex-row items-center gap-2">
-        <a class="flex-row items-center gap-2" href="/@{{comment.user.username}}">
-            <img 
+  <span class="aviso-post">{{comment.user.name}} comentou em:</span>
+  {% set post = comment.post %}
+  {%include "./_post.njk" %}
+  <div class="mt-2 flex-row items-center gap-2">
+    <a class="flex-row items-center gap-2" href="/@{{comment.user.username}}">
+      <img 
                 width="50"
                 height="50"
                 class="rounded-full"
-                src="imgs/foto-perfil.jpg"/>
-        </a>
-        <div>{{comment.text}}</div>
-    </div>
+                src="img/foto-perfil.jpg"/>
+    </a>
+    <div>{{comment.text}}</div>
+  </div>
 </article>

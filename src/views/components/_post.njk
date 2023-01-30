@@ -1,32 +1,32 @@
 <article class="max-w-[400px] gap-1">
-    <div class="flex-row justify-between items-center">
-        <a class="flex-row items-center gap-2" href="/@{{post.user.username}}">
-            <img 
+  <div class="flex-row justify-between items-center">
+    <a class="flex-row items-center gap-2" href="/@{{post.user.username}}">
+      <img 
                 width="50"
                 height="50"
                 class="rounded-full"
-                src="imgs/foto-perfil.jpg"/>
-            <h2 class="text-lg">{{post.user.name}}</h2>
-        </a>
-    </div>
-    <img 
+                src="img/foto-perfil.jpg"/>
+      <h2 class="text-lg">{{post.user.name}}</h2>
+    </a>
+  </div>
+  <img 
         class="w-full bg-gray-200"
         src="{{imageServer}}/w_512/v1675078381/{{post.image}}"/>
-    <div class="px-2 md:px-0 gap-2">
-        <div>{{post.description}}</div>
-        <div class="flex-row items-center">
-            <form class="flex-row items-center flex-1 bg-gray-300 rounded-full" action="" method="post">
-                <input
+  <div class="px-2 md:px-0 gap-2">
+    <div>{{post.description}}</div>
+    <div class="flex-row items-center">
+      <form class="flex-row items-center flex-1 bg-gray-300 rounded-full" action="" method="post">
+        <input
                 type="text"
                 placeholder="O que achou?"
                 class="flex-1 p-2 bg-transparent placeholder:text-gray-600 rounded-l-full"/>
-                <button type="submit" class="common-button rounded-r-full self-stretch justify-center pr-4">
-                    <i class="fa-solid fa-paper-plane"></i>
-                </button>
-            </form>
-            <button class="common-button rounded-full">
-                <i class="fa-regular fa-comment-dots"></i>
-            </button>
-        </div>
+        <button type="submit" class="common-button rounded-r-full self-stretch justify-center pr-4">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+      <button class="common-button rounded-full">
+        <i class="fa-regular fa-comment-dots"></i>
+      </button>
     </div>
+  </div>
 </article>
