@@ -2,24 +2,10 @@
 {% extends "../layout.njk" %}
 {% set title = "Entrar" %}
 {% block content %}
-  <div>
-    <div 
-      id="g_id_onload"
-      data-client_id="372766069915-ca48cmscjcbehq752nrqtl0blfh05esk.apps.googleusercontent.com"
-      data-context="signin"
-      data-ux_mode="popup"
-      data-auto_prompt="false"
-      data-login_uri="/sign-in"
-      data-auto_select="false"
-      data-itp_support="true"></div>
-    <div 
-      class="g_id_signin"
-      data-type="standard"
-      data-shape="pill"
-      data-theme="filled_blue"
-      data-text="signin_with"
-      data-size="large"
-      data-logo_alignment="left"
-      data-width="300"></div>
-  </div>
+  <main class="fixed inset-0 justify-center items-center">
+    <h1 class="font-bold text-2xl">Bem vindo!</h1>
+    <h3 class="opacity-50 mb-4">Para fazer coisas legais no site, por favor faça login.</h3>
+    {% include "components/_googleButton.njk" %}
+  </main>
+  <div></div>
 {% endblock %}
