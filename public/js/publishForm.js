@@ -6,6 +6,10 @@ const publishForm = document.querySelector("#publish-form");
 const imageDisplay = document.querySelector("#image-display");
 const imagePlaceholder = document.querySelector("#image-placeholder");
 
+const versionInput = document.querySelector("#version-input");
+const publicIdInput = document.querySelector("#publicId-input");
+const signatureInput = document.querySelector("#signature-input");
+
 publishForm.addEventListener("submit", handleSubmit);
 fileInput.addEventListener("change", handleFileChange);
 
@@ -28,7 +32,7 @@ async function uploadImage() {
   uploadData.append("signature", signatureResponse.data.signature);
   uploadData.append("timestamp", signatureResponse.data.timestamp);
 
-  const cloudinaryResponse = await axios.post(
+  const uploadRes = await axios.post(
     `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`,
     uploadData,
     {
@@ -37,19 +41,20 @@ async function uploadImage() {
     }
   );
 
-  const imageData = {
-    version: cloudinaryResponse.data.version,
-    public_id: cloudinaryResponse.data.public_id,
-    signature: cloudinaryResponse.data.signature,
-  };
-  return imageData;
+  return uploadRes;
 }
 
 async function handleSubmit(e) {
   e.preventDefault();
-  const imageData = await uploadImage();
-  console.log(imageData);
-  axios.post("/do-something-with-photo", photoData);
+
+  const uploadRes = await uploadImage();
+  console.log(uploadRes);
+
+  versionInput.value = uploadRes.data.version;
+  publicIdInput.value = uploadRes.data.public_id;
+  signatureInput.value = uploadRes.data.signature;
+
+  publishForm.submit();
 }
 
 function handleUploadProgress(e) {

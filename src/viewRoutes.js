@@ -15,6 +15,11 @@ routes.get("/publish", async (req, res) => {
   res.render("pages/publish");
 });
 
+routes.post("/publish", async (req, res) => {
+  console.log(req.body);
+  res.render("pages/publish");
+});
+
 routes.get("/", async (req, res) => {
   let posts = await getAllPosts();
   res.render("pages/index", { posts });
