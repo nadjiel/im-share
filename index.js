@@ -4,13 +4,7 @@ import express from "express";
 import nunjucks from "nunjucks";
 import { apiRoutes } from "./src/apiRoutes.js";
 import { viewRoutes } from "./src/viewRoutes.js";
-
-const errorHandling = (err, req, res, next) => {
-  res.status(500).json({
-    msg: err.message,
-    success: false,
-  });
-};
+import { handleError } from "./src/handleError.js";
 
 const app = express();
 
@@ -30,7 +24,7 @@ app.use(express.static("public"));
 app.use("/api/v1", apiRoutes);
 app.use(viewRoutes);
 
-app.use(errorHandling);
+app.use(handleError);
 
 const port = process.env.PORT || 3000;
 
