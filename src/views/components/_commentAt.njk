@@ -1,7 +1,7 @@
 <article class="post">
   <span class="aviso-post">{{comment.user.name}} comentou em:</span>
   {% set post = comment.post %}
-  {%include "./_post.njk" %}
+  {%include "./_postItem.njk" %}
   <div class="mt-2 flex-row items-center gap-2">
     <a class="flex-row items-center gap-2" href="/@{{comment.user.username}}">
       <img 
