@@ -1,7 +1,8 @@
 const cloudName = "dlwoimstk";
 const apiKey = "378278351497316";
 
-const fileInput = document.querySelector("#file-field");
+const fileInput = document.querySelector("#file-input");
+const submitInput = document.querySelector("#submit-input");
 const publishForm = document.querySelector("#publish-form");
 const imageDisplay = document.querySelector("#image-display");
 const imagePlaceholder = document.querySelector("#image-placeholder");
@@ -58,5 +59,8 @@ async function handleSubmit(e) {
 }
 
 function handleUploadProgress(e) {
-  console.log(e.loaded / e.total);
+  const percentage = (100 * e.loaded) / e.total;
+  const percentageDisplay =
+    percentage % 1 === 0 ? percentage : percentage.toFixed(1);
+  submitInput.innerHTML = `Enviando ${percentageDisplay}%`;
 }
