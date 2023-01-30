@@ -1,5 +1,6 @@
 import { v2 } from "cloudinary";
 import { Router } from "express";
+import { signIn } from "./auth/signIn.js";
 import { CLOUDINARY_SECRET } from "./env.js";
 import { createPost } from "./post/createPost.js";
 import { getAllPosts } from "./post/getAllPosts.js";
@@ -9,6 +10,12 @@ const routes = Router();
 export const viewRoutes = routes;
 
 routes.get("/sign-in", async (req, res) => {
+  res.render("pages/signIn");
+});
+
+routes.post("/sign-in", async (req, res) => {
+  console.log(req.body);
+  await signIn(req.body.credential);
   res.render("pages/signIn");
 });
 
