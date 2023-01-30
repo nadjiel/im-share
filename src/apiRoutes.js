@@ -11,7 +11,7 @@ export const apiRoutes = routes;
 
 routes.post("/login", authController);
 
-routes.use(isAuthenticated);
+// routes.use(isAuthenticated);
 routes.use("/users", userRouter);
 routes.use("/posts", postController);
 routes.use("/likes", likeController);

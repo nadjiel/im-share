@@ -2,37 +2,43 @@
 {% extends "../layout.njk" %}
 {% set title = "Publicar" %}
 {% block content %}
-    <form class='md:flex-row flex-1' id="upload-form">
-        <label class="bg-gray-300 flex-1 flex-col items-center justify-center cursor-pointer relative rounded-lg">
-            <div 
+  <form 
+    action=""
+    method="post"
+    id="publish-form"
+    class='md:flex-row flex-1'
+    >
+    <label class="bg-gray-300 flex-1 flex-col items-center justify-center cursor-pointer relative rounded-lg">
+      <div 
                 id="image-placeholder"
                 class="gap-2 text-2xl justify-center items-center">
-                <i class="fa-regular fa-image"></i>
-                <span>Adicionar imagem</span>
-            </div>
-            <input 
+        <i class="fa-regular fa-image"></i>
+        <span>Adicionar imagem</span>
+      </div>
+      <input 
                 hidden
                 type='file'
                 id='file-field'
                 accept="image/gif, image/jpeg, image/png, image/webp"></input>
-            <img 
+      <img 
                 id="image-display"
                 class="absolute max-w-full max-h-full w-auto h-auto"></img>
-        </label>
-        <div class="flex-1 p-4 gap-2">
-            <label>Descrição
+    </label>
+    <div class="flex-1 p-4 gap-2">
+      <label>Descrição
                 <textarea
                 rows="4"
-                class="border-2 p-2 rounded-lg"
+                name="description"
                 placeholder="Escrever algo"
+                class="border-2 p-2 rounded-lg"
                 ></textarea>
-            </label>
-            <button href="/publish" class="bg-blue-500 p-2 rounded-lg flex-row text-white items-center gap-1 justify-center max-w-xs">
-                <i class="fa-solid fa-paper-plane"></i>
+      </label>
+      <button href="/publish" class="bg-blue-500 p-2 rounded-lg flex-row text-white items-center gap-1 justify-center max-w-xs">
+        <i class="fa-solid fa-paper-plane"></i>
                 Publicar
             </button>
-        </div>
-    </form>
-    <script src="js/publishForm.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </div>
+  </form>
+  <script src="js/publishForm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% endblock %}

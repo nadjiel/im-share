@@ -2,11 +2,11 @@ const cloudName = "dlwoimstk";
 const apiKey = "378278351497316";
 
 const fileInput = document.querySelector("#file-field");
-const uploadForm = document.querySelector("#upload-form");
+const publishForm = document.querySelector("#publish-form");
 const imageDisplay = document.querySelector("#image-display");
 const imagePlaceholder = document.querySelector("#image-placeholder");
 
-uploadForm.addEventListener("submit", handleSubmit);
+publishForm.addEventListener("submit", handleSubmit);
 fileInput.addEventListener("change", handleFileChange);
 
 function handleFileChange(e) {
@@ -19,37 +19,36 @@ function handleFileChange(e) {
   reader.readAsDataURL(file);
 }
 
-async function handleSubmit(e) {
-  e.preventDefault();
-  console.log("massa");
-
-  // get signature. In reality you could store this in localstorage or some other cache mechanism, it's good for 1 hour
+async function uploadImage() {
   const signatureResponse = await axios.get("/api/v1/upload/signature");
-  console.log(signatureResponse);
 
-  const data = new FormData();
-  data.append("file", fileInput.files[0]);
-  data.append("api_key", apiKey);
-  data.append("signature", signatureResponse.data.signature);
-  data.append("timestamp", signatureResponse.data.timestamp);
+  const uploadData = new FormData();
+  uploadData.append("api_key", apiKey);
+  uploadData.append("file", fileInput.files[0]);
+  uploadData.append("signature", signatureResponse.data.signature);
+  uploadData.append("timestamp", signatureResponse.data.timestamp);
 
   const cloudinaryResponse = await axios.post(
     `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`,
-    data,
+    uploadData,
     {
-      headers: { "Content-Type": "multipart/form-data" },
       onUploadProgress: handleUploadProgress,
+      headers: { "Content-Type": "multipart/form-data" },
     }
   );
-  console.log(cloudinaryResponse.data);
 
-  // send the image info back to our server
-  const photoData = {
+  const imageData = {
     version: cloudinaryResponse.data.version,
     public_id: cloudinaryResponse.data.public_id,
     signature: cloudinaryResponse.data.signature,
   };
+  return imageData;
+}
 
+async function handleSubmit(e) {
+  e.preventDefault();
+  const imageData = await uploadImage();
+  console.log(imageData);
   axios.post("/do-something-with-photo", photoData);
 }
 
