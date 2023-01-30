@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { db } from "../database/db.js";
+import { createPost } from "./createPost.js";
 import { getAllPosts } from "./getAllPosts.js";
 
 const router = Router();
@@ -17,10 +18,8 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { description } = req.body;
-  const data = { description };
-  // todo add user id by req
-  const post = await db.post.create({ data });
+  const { description, image } = req.body;
+  const post = createPost({ description, image });
   res.status(201).json(post);
 });
 
