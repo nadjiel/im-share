@@ -1,11 +1,10 @@
-{% set title = "Instagram só que melhor" %}
 {% set imageServer = "https://res.cloudinary.com/dlwoimstk/image/upload/" %}
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{{ title }}</title>
+        <title>{{ title or "Instagram só que melhor" }}</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" type="text/css" href="./css/index.css"/>
         <script src="https://kit.fontawesome.com/7642ff95a4.js" crossorigin="anonymous"></script>
