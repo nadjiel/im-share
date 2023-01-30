@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import bcrypt from "bcrypt";
 import { Router } from "express";
 import { db } from "../database/db.js";
 import duration from "dayjs/plugin/duration.js";
@@ -15,10 +14,13 @@ const secondInYear = dayjs.duration({ years: 1 }).asSeconds();
 
 router.post("/sign-in", async (req, res) => {
   const user = await signIn(req.body.credential);
-  res.json(user);
+  const access = generateToken(user.id, secondInHour);
+  const refresh = generateToken(user.id, secondInYear);
+  await saveTokenInBd(refresh, user.id);
+  res.json({ refresh, access, user });
 });
 
-router.post("/refresh-token", async (req, res, next) => {
+router.post("/refresh-token", async (req, res) => {
   const { refresh } = req.body;
 
   if (!refresh) {
