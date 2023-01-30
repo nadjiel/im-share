@@ -13,14 +13,9 @@ dayjs.extend(duration);
 const secondInHour = dayjs.duration({ hours: 1 }).asSeconds();
 const secondInYear = dayjs.duration({ years: 1 }).asSeconds();
 
-router.post("/login", async (req, res) => {
-  // todo replace by sign in
-  const { username } = req.body;
-  const user = await db.user.findFirstOrThrow({ where: { username } });
-  const access = generateToken(user.id, secondInHour);
-  const refresh = generateToken(user.id, secondInYear);
-  await savedTokenInBd(refresh, user.id);
-  res.status(201).json({ refresh, access });
+router.post("/sign-in", async (req, res) => {
+  const user = await signIn(req.body.credential);
+  res.json(user);
 });
 
 router.post("/refresh-token", async (req, res, next) => {

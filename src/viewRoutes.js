@@ -14,7 +14,6 @@ routes.get("/sign-in", async (req, res) => {
 });
 
 routes.post("/sign-in", async (req, res) => {
-  console.log(req.body);
   await signIn(req.body.credential);
   res.render("pages/signIn");
 });

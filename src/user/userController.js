@@ -4,11 +4,6 @@ import { db } from "../database/db.js";
 const router = Router();
 export const userRouter = router;
 
-router.post("/", async function (req, res) {
-  const user = await createUser(req.body);
-  res.status(201).json(user);
-});
-
 router.get("/", async function (req, res) {
   const users = await db.user.findMany({
     orderBy: { username: "desc" },
