@@ -49,7 +49,6 @@ async function handleSubmit(e) {
   e.preventDefault();
 
   const uploadRes = await uploadImage();
-  console.log(uploadRes);
 
   versionInput.value = uploadRes.data.version;
   publicIdInput.value = uploadRes.data.public_id;

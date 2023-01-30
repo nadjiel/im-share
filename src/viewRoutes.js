@@ -19,7 +19,6 @@ routes.get("/publish", async (req, res) => {
 });
 
 routes.post("/publish", async (req, res) => {
-  console.log(req.body);
   const { publicId, version, signature } = req.body;
   const expectedSignature = v2.utils.api_sign_request(
     { public_id: publicId, version },
