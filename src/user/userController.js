@@ -5,10 +5,7 @@ const router = Router();
 export const userRouter = router;
 
 router.post("/", async function (req, res) {
-  const { name, email, username, picture } = req.body;
-  const data = { name, email, username, picture };
-  const user = await db.user.create({ data });
-
+  const user = await createUser(req.body);
   res.status(201).json(user);
 });
 
