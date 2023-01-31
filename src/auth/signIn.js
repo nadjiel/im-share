@@ -17,4 +17,5 @@ export async function signIn(idToken) {
   const userCount = await db.user.count();
   const username = given_name.toLowerCase() + userCount;
   user = await createUser({ email, name, picture, username });
+  return user;
 }
