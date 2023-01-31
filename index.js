@@ -2,6 +2,7 @@ import "express-async-errors";
 import cors from "cors";
 import express from "express";
 import nunjucks from "nunjucks";
+import cookieParser from "cookie-parser";
 import { apiRoutes } from "./src/apiRoutes.js";
 import { viewRoutes } from "./src/viewRoutes.js";
 import { handleError } from "./src/handleError.js";
@@ -9,6 +10,7 @@ import { handleError } from "./src/handleError.js";
 const app = express();
 
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

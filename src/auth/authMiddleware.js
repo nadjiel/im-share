@@ -1,16 +1,18 @@
-export async function authMiddleware(req, res, next) {
-  const authToken = req.headers.authorization;
+import jwt from "jsonwebtoken";
+import { JWT_KEY } from "../env.js";
 
+export async function authMiddleware(req, res, next) {
+  const authToken = req.cookies["Authorization"];
   if (!authToken) {
-    return res.status(401).json({ error: "Token está faltando" });
+    return next();
   }
 
-  const [, token] = authToken.split(" ");
-
   try {
-    jwt.verify(token, key_private);
+    const result = jwt.verify(authToken, JWT_KEY);
+    const userId = result.sub;
+    req.userId = userId;
     return next();
-  } catch {
-    return res.status(401).json({ error: "Token invalido" });
+  } catch (e) {
+    return next();
   }
 }

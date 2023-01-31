@@ -1,20 +1,23 @@
+import dayjs from "dayjs";
 import { v2 } from "cloudinary";
 import { Router } from "express";
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration.js";
 import { signIn } from "./auth/signIn.js";
 import { CLOUDINARY_SECRET } from "./env.js";
+import duration from "dayjs/plugin/duration.js";
 import { getPost } from "./post/getPostById.js";
 import { createPost } from "./post/createPost.js";
 import { getAllPosts } from "./post/getAllPosts.js";
-import { getUserByUsername } from "./user/getUserByUsername.js";
 import { generateToken } from "./auth/generatedToken.js";
+import { authMiddleware } from "./auth/authMiddleware.js";
+import { getUserByUsername } from "./user/getUserByUsername.js";
 
 dayjs.extend(duration);
 const oneWeekAsSeconds = dayjs.duration({ week: 1 }).asSeconds();
 
 const routes = Router();
 export const viewRoutes = routes;
+
+routes.use(authMiddleware);
 
 routes.get("/sign-in", async (req, res) => {
   res.render("pages/signIn");
