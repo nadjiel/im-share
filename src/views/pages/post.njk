@@ -7,12 +7,12 @@
             class="max-w-full max-h-full w-auto h-auto shadow-lg"
             src="{{imageServer}}/w_512/v1675078381/{{post.image}}"></img>
         </div>
-        <div class='flex-1 p-2 gap-2'>
+        <div class='flex-1 p-2 pb-0 gap-2'>
             <div class="flex-row justify-between items-center">
                 <a class="flex-row items-center gap-2" href="/@{{post.user.username}}">
                     <img 
-                        width="42"
-                        height="42"
+                        width="20"
+                        height="20"
                         class="rounded-full"
                         src="/img/foto-perfil.jpg"/>
                     <h2 class="text-lg">{{post.user.name}}</h2>
@@ -25,13 +25,20 @@
                     <span class="opacity-50">Sem descrição</span>
                 {% endif %}
             </div>
-            {% if logged %}
-                {% include "components/_commentInput.njk" %}
-            {% else %}
-                <div class="block bg-gray-200 rounded-lg p-2">
+            <ul class="gap-2">
+                {% for comment in post.comments %}
+                    {% include "../components/_commentItem.njk" %}
+                {% endfor %}
+            </ul>
+            <div class="sticky bottom-0 pb-2 bg-white rounded-t-lg">
+                {% if logged %}
+                    {% include "components/_commentInput.njk" %}
+                {% else %}
+                    <div class="block bg-gray-200 rounded-lg p-2">
                     Faça <a href="/sign-in" class="text-blue-500 inline underline">login</a> para comentar
                 </div>
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}
