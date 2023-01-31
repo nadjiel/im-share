@@ -1,4 +1,5 @@
 export function handleError(error, req, res, next) {
+  console.error(error);
   let message = error.message;
 
   const prismaIdentifier = "\nInvalid `prisma";

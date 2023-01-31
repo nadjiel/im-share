@@ -1,11 +1,17 @@
 import { v2 } from "cloudinary";
 import { Router } from "express";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration.js";
 import { signIn } from "./auth/signIn.js";
 import { CLOUDINARY_SECRET } from "./env.js";
 import { getPost } from "./post/getPostById.js";
 import { createPost } from "./post/createPost.js";
 import { getAllPosts } from "./post/getAllPosts.js";
 import { getUserByUsername } from "./user/getUserByUsername.js";
+import { generateToken } from "./auth/generatedToken.js";
+
+dayjs.extend(duration);
+const oneWeekAsSeconds = dayjs.duration({ week: 1 }).asSeconds();
 
 const routes = Router();
 export const viewRoutes = routes;
@@ -15,7 +21,10 @@ routes.get("/sign-in", async (req, res) => {
 });
 
 routes.post("/sign-in", async (req, res) => {
-  await signIn(req.body.credential);
+  const user = await signIn(req.body.credential);
+  const access = generateToken(user.id, oneWeekAsSeconds);
+  const expires = dayjs().add(7, "days").toDate();
+  res.cookie("Authorization", access, { expires });
   res.render("pages/signIn");
 });
 

@@ -9,13 +9,13 @@ export const authController = router;
 
 dayjs.extend(duration);
 
-const secondInHour = dayjs.duration({ hours: 1 }).asSeconds();
-const secondInYear = dayjs.duration({ years: 1 }).asSeconds();
+const oneHourAsSeconds = dayjs.duration({ hours: 1 }).asSeconds();
+const oneYearAsSeconds = dayjs.duration({ years: 1 }).asSeconds();
 
 router.post("/sign-in", async (req, res) => {
   const user = await signIn(req.body.credential);
-  const access = generateToken(user.id, secondInHour);
-  const refresh = generateToken(user.id, secondInYear);
+  const access = generateToken(user.id, oneHourAsSeconds);
+  const refresh = generateToken(user.id, oneYearAsSeconds);
   await saveTokenInBd(refresh, user.id);
   res.json({ refresh, access, user });
 });
@@ -41,6 +41,6 @@ router.post("/refresh-token", async (req, res) => {
     });
   }
 
-  const access = generatedToken(dataToken.userId, secondInHour);
+  const access = generatedToken(dataToken.userId, oneHourAsSeconds);
   res.status(201).json({ access });
 });

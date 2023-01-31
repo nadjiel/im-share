@@ -10,7 +10,6 @@ export async function signIn(idToken) {
   const payload = ticket.getPayload();
   const { name, email, picture, given_name } = payload;
   let user = await db.user.findUnique({ where: { email } });
-  console.log(user);
   if (user) {
     return user;
   }
