@@ -17,7 +17,6 @@ model User {
   createdAt        DateTime       @default(now())
   posts            Post[]         @relation()
   comments         Comment[]      @relation("user")
-  responseComments Comment[]      @relation("userResponse")
   userFriendship   Friendship[]   @relation("UserId")
   friendFriendship Friendship[]   @relation("FriendId")
   likes            Like[]         @relation()
@@ -41,16 +40,14 @@ model Post {
 }
 
 model Comment {
-  id         String   @id @default(uuid())
-  text       String
-  userId     String
-  postId     String
-  responseId String
-  user       User     @relation(fields: [userId], references: [id], name: "user")
-  post       Post     @relation(fields: [postId], references: [id])
-  response   User     @relation(fields: [responseId], references: [id], name: "userResponse")
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        String   @id @default(uuid())
+  text      String
+  userId    String
+  postId    String
+  user      User     @relation(fields: [userId], references: [id], name: "user")
+  post      Post     @relation(fields: [postId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("comments")
 }

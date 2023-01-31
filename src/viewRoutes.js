@@ -11,6 +11,7 @@ import { generateToken } from "./auth/generatedToken.js";
 import { authMiddleware } from "./auth/authMiddleware.js";
 import { getUserByUsername } from "./user/getUserByUsername.js";
 import { getUserById } from "./user/getUserById.js";
+import { createComment } from "./comment/createComment.js";
 
 dayjs.extend(duration);
 const oneWeekAsSeconds = dayjs.duration({ week: 1 }).asSeconds();
@@ -43,6 +44,13 @@ routes.get("/post/:id", async (req, res) => {
   const post = await getPost(id);
   const { logged } = req;
   res.render("pages/post", { post, logged });
+});
+
+routes.post("/post/:postId/comment", async (req, res) => {
+  const { postId } = req.params;
+  const { userId } = req;
+  await createComment({ ...req.body, userId, postId });
+  res.redirect("/post/" + postId);
 });
 
 routes.get("/publish", async (req, res) => {
