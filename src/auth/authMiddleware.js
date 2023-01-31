@@ -1,4 +1,4 @@
-export async function isAuthenticated(req, res, next) {
+export async function authMiddleware(req, res, next) {
   const authToken = req.headers.authorization;
 
   if (!authToken) {
