@@ -39,6 +39,10 @@ span {
   padding: 0.5rem;
 }
 
+.button {
+  @apply cursor-pointer;
+}
+
 .common-button:hover {
   background: #8888;
 }

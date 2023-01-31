@@ -10,7 +10,7 @@
             class="max-w-full max-h-full w-auto h-auto shadow-lg"
             src="{{imageServer}}/w_512/v1675078381/{{post.image}}"></img>
         </div>
-        <div class='flex-1 p-2 md:pt-10 pb-0 gap-2 z-10 bg-white'>
+        <div class='flex-1 p-2 md:pt-10 pb-0 gap-2 bg-white'>
             <div class="flex-row justify-between items-center pt-2">
                 <a class="flex-row items-center gap-2" href="/@{{post.user.username}}">
                     <img 
@@ -20,6 +20,7 @@
                         src="{{post.user.picture}}"/>
                     <h2 class="text-lg">{{post.user.name}}</h2>
                 </a>
+                {% include "components/_postButtons.njk" %}
             </div>
             <div class="flex-1">
                 {% if post.description %}

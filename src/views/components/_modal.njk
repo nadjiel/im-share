@@ -1,0 +1,29 @@
+<div id="{{modalId}}" class="modal bg-black/50 fixed z-50 inset-0 justify-center items-center">
+    <div class="bg-white p-2 rounded-lg relative">
+        <a 
+            href="#!" 
+            class="aspect-square absolute -top-7 h-8 rounded-lg -right-7 p-2 hover:bg-black/20 bg-black/50 text-white items-center justify-center text-lg cursor-pointer">
+            <i class="fa-solid fa-times"></i>
+        </a>
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+<style>
+    @keyframes appear {
+        from {
+            opacity: 0;
+        }
+    }
+
+    .modal {
+        display: fixed;
+        animation-play-state: running;
+        animation: 0.1s appear;
+    }
+
+    .modal:not(:target):not([open]) {
+        display: none;
+        animation-play-state: paused;
+    }
+</style>
