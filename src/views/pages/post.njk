@@ -18,11 +18,14 @@
                     <h2 class="text-lg">{{post.user.name}}</h2>
                 </a>
             </div>
-            {% if post.description %}
-                <div>{{post.description}}</div>
-            {% else %}
-                <div class="opacity-50">Sem descrição</div>
-            {% endif %}
+            <div class="flex-1">
+                {% if post.description %}
+                    {{post.description}}
+                {% else %}
+                    <span class="opacity-50">Sem descrição</span>
+                {% endif %}
+            </div>
+            {% include "components/_commentInput.njk" %}
         </div>
     </div>
 {% endblock %}
