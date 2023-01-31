@@ -10,6 +10,7 @@ import { getAllPosts } from "./post/getAllPosts.js";
 import { generateToken } from "./auth/generatedToken.js";
 import { authMiddleware } from "./auth/authMiddleware.js";
 import { getUserByUsername } from "./user/getUserByUsername.js";
+import { getUserById } from "./user/getUserById.js";
 
 dayjs.extend(duration);
 const oneWeekAsSeconds = dayjs.duration({ week: 1 }).asSeconds();
@@ -40,7 +41,8 @@ routes.get("/@:username", async (req, res) => {
 routes.get("/post/:id", async (req, res) => {
   const { id } = req.params;
   const post = await getPost(id);
-  res.render("pages/post", { post });
+  const { logged } = req;
+  res.render("pages/post", { post, logged });
 });
 
 routes.get("/publish", async (req, res) => {

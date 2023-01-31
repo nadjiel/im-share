@@ -25,7 +25,13 @@
                     <span class="opacity-50">Sem descrição</span>
                 {% endif %}
             </div>
-            {% include "components/_commentInput.njk" %}
+            {% if logged %}
+                {% include "components/_commentInput.njk" %}
+            {% else %}
+                <div class="block bg-gray-200 rounded-lg p-2">
+                    Faça <a href="/sign-in" class="text-blue-500 inline underline">login</a> para comentar
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
