@@ -18,9 +18,13 @@
                     <h2 class="text-lg">{{post.user.name}}</h2>
                 </a>
             </div>
-            <div>
-                {{post.description}}
-            </div>
+            {% if post.description %}
+                <div>
+                    {{post.description}}
+                </div>
+            {% else %}
+                <div class="opacity-50">Sem descrição</div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
