@@ -1,4 +1,4 @@
-<article class="max-w-[400px] gap-1">
+<article class="gap-1 md:max-w-[25vw]">
   <div class="flex-row justify-between items-center">
     <a class="flex-row items-center gap-2" href="/@{{post.user.username}}">
       <img 
@@ -11,7 +11,7 @@
   </div>
   <a href="/post/{{post.id}}" class='gap-1'>
     <img
-      class="w-full md:rounded-lg bg-gray-200" 
+      class="w-full md:rounded-lg bg-gray-200 md:object-cover" 
       src="{{imageServer}}/w_512/v1675078381/{{post.image}}"/>
     <div class="px-2 md:px-0 gap-2">
       <div>{{post.description}}</div>

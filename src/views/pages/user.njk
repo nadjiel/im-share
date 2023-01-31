@@ -14,14 +14,16 @@
       <h2 class="text-xl">@{{user.username}}</h2>
     </div>
   </section>
-  <section class="flex-row gap-6 flex-wrap justify-center">
-    {% for post in user.posts %}
-      {% include "../components/_postItem.njk" %}
-    {% endfor %}
-    {% for comment in user.comments %}
-      {% include "../components/_commentAt.njk" %}
-    {% endfor %}
-  </section>
+  <div class="flex-col items-center">
+    <section class="grid gap-2 gap-y-4 md:gap-y-2 md:grid-cols-3 justify-center">
+      {% for post in user.posts %}
+        {% include "../components/_postItem.njk" %}
+      {% endfor %}
+      {% for comment in user.comments %}
+        {% include "../components/_commentAt.njk" %}
+      {% endfor %}
+    </section>
+  </div>
 {% endblock %}
 
 {% block script %}{% endblock %}
