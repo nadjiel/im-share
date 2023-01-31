@@ -1,5 +1,5 @@
 {% extends "../layout.njk" %}
-{% set title = "Post" %}
+{% set title = post.description or "Post" %}
 {% block content %}
     <div class="md:flex-row flex-1">
         <div class="flex-1 self-stretch items-center justify-center bg-gray-200">
@@ -14,7 +14,7 @@
                         width="20"
                         height="20"
                         class="rounded-full"
-                        src="/img/foto-perfil.jpg"/>
+                        src="{{post.user.picture}}"/>
                     <h2 class="text-lg">{{post.user.name}}</h2>
                 </a>
             </div>

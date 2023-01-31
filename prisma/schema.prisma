@@ -11,7 +11,7 @@ model User {
   id               String         @id @default(uuid())
   name             String
   email            String         @unique
-  picture          String         @default("img/profile_default.jpg")
+  picture          String
   username         String         @unique
   updatedAt        DateTime       @updatedAt
   createdAt        DateTime       @default(now())
