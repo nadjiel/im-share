@@ -3,7 +3,7 @@ export function handleError(error, req, res, next) {
   let message = error.message;
 
   const prismaIdentifier = "\nInvalid `prisma";
-  if (message.startsWith(prismaIdentifier)) {
+  if (message && message.startsWith(prismaIdentifier)) {
     message = message.split("\n\n").at(-2);
   }
 
