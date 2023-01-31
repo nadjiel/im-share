@@ -2,6 +2,7 @@ import { v2 } from "cloudinary";
 import { Router } from "express";
 import { signIn } from "./auth/signIn.js";
 import { CLOUDINARY_SECRET } from "./env.js";
+import { getPost } from "./post/getPostById.js";
 import { createPost } from "./post/createPost.js";
 import { getAllPosts } from "./post/getAllPosts.js";
 import { getUserByUsername } from "./user/getUserByUsername.js";
@@ -22,6 +23,12 @@ routes.get("/@:username", async (req, res) => {
   const { username } = req.params;
   const user = await getUserByUsername(username);
   res.render("pages/user", { user });
+});
+
+routes.get("/post/:id", async (req, res) => {
+  const { id } = req.params;
+  const post = await getPost(id);
+  res.render("pages/post", { post });
 });
 
 routes.get("/publish", async (req, res) => {

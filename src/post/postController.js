@@ -2,6 +2,7 @@ import { Router } from "express";
 import { db } from "../database/db.js";
 import { createPost } from "./createPost.js";
 import { getAllPosts } from "./getAllPosts.js";
+import { getPost } from "./getPostById.js";
 
 const router = Router();
 export const postController = router;
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const post = await db.post.findUniqueOrThrow({ where: { id } });
+  const post = await getPost(id);
   res.json(post);
 });
 
