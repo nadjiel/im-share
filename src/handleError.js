@@ -1,5 +1,7 @@
 export function handleError(error, req, res, next) {
+  res.status(500);
   console.error(error);
+
   let message = error.message;
 
   const prismaIdentifier = "\nInvalid `prisma";
@@ -7,5 +9,10 @@ export function handleError(error, req, res, next) {
     message = message.split("\n\n").at(-2);
   }
 
-  res.status(500).json({ message, success: false });
+  const unauthorizedIdentifier = "Unauthorized";
+  if (message && message.startsWith(unauthorizedIdentifier)) {
+    res.status(401);
+  }
+
+  res.json({ message, success: false });
 }

@@ -26,10 +26,15 @@ router.post("/", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
   const { id } = req.params;
+  const post = await db.post.findUnique({ where: { id } });
+
+  const { userId } = req;
+  if (post.userId !== userId) {
+    throw new Error("Unauthorized post patch");
+  }
+
   const { description } = req.body;
-  const data = { description };
-  // todo add authorization
-  await db.post.update({ where: { id }, data });
+  await db.post.update({ where: { id }, data: { description } });
   res.json({ data });
 });
 
