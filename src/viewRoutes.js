@@ -58,7 +58,7 @@ routes.post("/publish", async (req, res) => {
   const image = publicId;
 
   const post = await createPost({ image, description });
-  res.redirect("/@yo");
+  res.redirect("/post/" + post.id);
 });
 
 routes.get("/", async (req, res) => {
