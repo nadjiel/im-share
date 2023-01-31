@@ -1,10 +1,12 @@
 <div id="{{modalId}}" class="modal bg-black/50 fixed z-50 inset-0 justify-center items-center">
-    <div class="bg-white p-2 rounded-lg relative">
-        <a 
+    <div class="bg-white p-2 rounded-lg relative max-w-[100vw]">
+        <div class="absolute -top-8 right-0 md:-top-7 md:-right-7">
+            <a 
             href="#!" 
-            class="aspect-square absolute -top-7 h-8 rounded-lg -right-7 p-2 hover:bg-black/20 bg-black/50 text-white items-center justify-center text-lg cursor-pointer">
-            <i class="fa-solid fa-times"></i>
-        </a>
+            class="aspect-square h-8 rounded-lg p-2 hover:bg-black/20 bg-black/50 text-white items-center justify-center text-lg cursor-pointer">
+                <i class="fa-solid fa-times"></i>
+            </a>
+        </div>
         {% block content %}{% endblock %}
     </div>
 </div>
