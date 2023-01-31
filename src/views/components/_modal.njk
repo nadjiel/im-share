@@ -13,13 +13,14 @@
     @keyframes appear {
         from {
             opacity: 0;
+            scale: 110%;
         }
     }
 
     .modal {
         display: fixed;
         animation-play-state: running;
-        animation: 0.1s appear;
+        animation: 0.2s appear;
     }
 
     .modal:not(:target):not([open]) {
