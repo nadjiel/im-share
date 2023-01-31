@@ -1,7 +1,7 @@
 {% extends "../layout.njk" %}
 {% set title = "Post" %}
 {% block content %}
-    <div class="flex-row flex-1">
+    <div class="md:flex-row flex-1">
         <div class="flex-1 self-stretch items-center justify-center bg-gray-300">
             <img 
             class="max-w-full max-h-full w-auto h-auto shadow-lg"
@@ -19,9 +19,7 @@
                 </a>
             </div>
             {% if post.description %}
-                <div>
-                    {{post.description}}
-                </div>
+                <div>{{post.description}}</div>
             {% else %}
                 <div class="opacity-50">Sem descrição</div>
             {% endif %}
