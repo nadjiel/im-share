@@ -23,7 +23,7 @@ routes.get("/sign-in", async (req, res) => {
   res.render("pages/signIn");
 });
 
-routes.post("/sign-in", async (req, res) => {
+routes.post("/user", async (req, res) => {
   const user = await signIn(req.body.credential);
   const access = generateToken(user.id, oneWeekAsSeconds);
   const expires = dayjs().add(7, "days").toDate();
@@ -44,6 +44,9 @@ routes.get("/post/:id", async (req, res) => {
 });
 
 routes.get("/publish", async (req, res) => {
+  if (!req.userId) {
+    return res.redirect("/sign-in");
+  }
   res.render("pages/publish");
 });
 
