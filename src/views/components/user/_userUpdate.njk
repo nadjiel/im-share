@@ -1,0 +1,21 @@
+{% extends "../_modal.njk" %}
+{% set modalId = "update" %}
+{% block content %}
+    <form
+    method="post"
+    class="gap-2"
+    action="/user/{{user.id}}/update">
+        <label>Nome de Usuário
+        <input
+            type="text"
+            value={{user.name}}
+            name="text"
+            placeholder="Escrever algo"
+            class="border-2 p-2 rounded-lg w-full"
+        />
+        </label>
+        <button class="bg-blue-500 p-2 rounded-lg flex-row text-white items-center gap-1 justify-center">
+            Salvar
+        </button>
+    </form>
+{% endblock %}

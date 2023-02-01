@@ -16,6 +16,8 @@ import { deleteComment } from "./comment/deleteComment.js";
 import { getUserByUsername } from "./user/getUserByUsername.js";
 import { updateComment } from "./comment/updateComment.js";
 import { getUserById } from "./user/getUserById.js";
+import { updateUser } from "./user/updateUser.js";
+import { deleteUser } from "./user/deleteUser.js";
 
 dayjs.extend(duration);
 const oneWeekAsSeconds = dayjs.duration({ week: 1 }).asSeconds();
@@ -52,8 +54,9 @@ routes.post("/user", async (req, res) => {
 
 routes.get("/@:username", async (req, res) => {
   const { username } = req.params;
+  const { userId } = req;
   const user = await getUserByUsername(username);
-  res.render("pages/user", { user });
+  res.render("pages/user", { user, userId });
 });
 
 routes.get("/post/:id", async (req, res) => {
@@ -76,6 +79,12 @@ routes.post("/comment/:id/delete", async (req, res) => {
   res.redirect("/post/" + comment.postId);
 });
 
+routes.post("/users/:id/delete", async (req, res) => {
+  const { id } = req.params;
+  const user = await deleteUser({ id });
+  res.redirect("/");
+});
+
 routes.post("/post/:id/update", async (req, res) => {
   const { userId } = req;
   const { id } = req.params;
@@ -89,6 +98,12 @@ routes.post("/comment/:id/update", async (req, res) => {
   const { id } = req.params;
   const comment = await updateComment({ ...req.body, id, userId });
   res.redirect("/post/" + comment.postId);
+});
+
+routes.post("/user/:id/update", async (req, res) => {
+  const { id } = req.params;
+  const user = await updateUser({ ...req.body, id });
+  res.redirect("/@" + user.username);
 });
 
 routes.post("/post/:postId/comment", async (req, res) => {

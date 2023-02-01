@@ -17,6 +17,7 @@
     </div>
     {% if user.id == userId %}
       {% include 'components/_logoutButton.njk' %}
+      {% include "components/user/_userConfig.njk" %}
     {% endif %}
   </section>
   <div class="flex-col items-center">

@@ -1,0 +1,17 @@
+{% extends "../_modal.njk" %}
+{% set modalId = "remove" %}
+{% block content %}
+    <div>
+        Você deseja mesmo remover seu usuário?
+        <div class="flex-row justify-end">
+            <a 
+                href="#!" 
+                class='text-blue-500 font-semibold p-2 hover:bg-black/10 rounded-lg'>
+                Cancelar
+            </a>
+            <form action="/user/{{user.id}}/delete" method="post">
+                <input type="submit" value="Remover" class="cursor-pointer text-blue-500 font-semibold p-2 hover:bg-black/10 rounded-lg"></input>
+            </form>
+        </div>
+    </div>
+{% endblock %}

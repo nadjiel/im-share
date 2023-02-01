@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { db } from "../database/db.js";
+import { deleteUser } from "./deleteUser.js";
 
 const router = Router();
 export const userRouter = router;
@@ -22,16 +23,15 @@ router.get("/:id", async function (req, res) {
 router.patch("/:id", async function (req, res) {
   const { id } = req.params;
   const { name, email, username, picture } = req.body;
-  const data = { name, email, username, picture };
-  await db.user.update({ where: { id }, data });
+  const data = { id, name, email, username, picture };
+  const user = await updateUser(data)
+  res.json(user);
 });
 
 router.delete("/:id", async function (req, res) {
   const { id } = req.params;
   const { userId } = req;
-  const user = await db.user.findUniqueOrThrow({ where: { id } });
-  if (user.id !== userId) {
-    throw new Error("Unauthorized user deletion");
-  }
-  await db.user.delete({ where: { id } });
+
+  deleteUser({ id, userId })
+  res.send();
 });
