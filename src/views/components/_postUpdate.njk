@@ -1,7 +1,10 @@
 {% extends "./_modal.njk" %}
 {% set modalId = "update" %}
 {% block content %}
-    <form action="/post/{{post.id}}/update" method="post">
+    <form
+    method="post"
+    class="gap-2"
+    action="/post/{{post.id}}/update">
         <label>Descrição
         <textarea
             rows="4"
