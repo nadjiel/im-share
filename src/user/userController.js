@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { db } from "../database/db.js";
 import { deleteUser } from "./deleteUser.js";
+import { updateUser } from "./updateUser.js";
 
 const router = Router();
 export const userRouter = router;

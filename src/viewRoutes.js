@@ -79,7 +79,7 @@ routes.post("/comment/:id/delete", async (req, res) => {
   res.redirect("/post/" + comment.postId);
 });
 
-routes.post("/users/:id/delete", async (req, res) => {
+routes.post("/user/:id/delete", async (req, res) => {
   const { id } = req.params;
   const user = await deleteUser({ id });
   res.redirect("/");

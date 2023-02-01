@@ -15,12 +15,12 @@ model User {
   username         String         @unique
   updatedAt        DateTime       @updatedAt
   createdAt        DateTime       @default(now())
-  posts            Post[]         @relation()
-  comments         Comment[]      @relation("user")
+  posts            Post[]
+  comments         Comment[]
   userFriendship   Friendship[]   @relation("UserId")
   friendFriendship Friendship[]   @relation("FriendId")
-  likes            Like[]         @relation()
-  refreshToken     refreshToken[] @relation()
+  likes            Like[]
+  refreshToken     refreshToken[]
 
   @@map("users")
 }
@@ -30,9 +30,9 @@ model Post {
   description String
   userId      String
   image       String
-  user        User      @relation(fields: [userId], references: [id])
-  like        Like[]    @relation()
-  comments    Comment[] @relation()
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  like        Like[]
+  comments    Comment[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
@@ -44,7 +44,7 @@ model Comment {
   text      String
   userId    String
   postId    String
-  user      User     @relation(fields: [userId], references: [id], name: "user", onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -54,8 +54,8 @@ model Comment {
 
 model Friendship {
   id        String   @id @default(uuid())
-  user      User     @relation(fields: [userId], references: [id], name: "UserId")
-  friend    User     @relation(fields: [friendId], references: [id], name: "FriendId")
+  user      User     @relation(fields: [userId], references: [id], name: "UserId", onDelete: Cascade)
+  friend    User     @relation(fields: [friendId], references: [id], name: "FriendId", onDelete: Cascade)
   userId    String
   friendId  String
   createdAt DateTime @default(now())
@@ -66,9 +66,9 @@ model Friendship {
 
 model Like {
   id        String   @id @default(uuid())
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -79,7 +79,7 @@ model Like {
 model refreshToken {
   token   String @id
   expires Int
-  user    User   @relation(fields: [userId], references: [id])
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  String
 
   @@map("refresh_token")
