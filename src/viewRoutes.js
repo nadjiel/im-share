@@ -12,6 +12,7 @@ import { generateToken } from "./auth/generatedToken.js";
 import { authMiddleware } from "./auth/authMiddleware.js";
 import { createComment } from "./comment/createComment.js";
 import { getUserByUsername } from "./user/getUserByUsername.js";
+import { updatePost } from "./post/updatePost.js";
 
 dayjs.extend(duration);
 const oneWeekAsSeconds = dayjs.duration({ week: 1 }).asSeconds();
@@ -50,6 +51,14 @@ routes.post("/post/:id/delete", async (req, res) => {
   const { id } = req.params;
   const { userId } = req;
   await deletePost({ id, userId });
+  res.redirect("/");
+});
+
+routes.post("/post/:id/update", async (req, res) => {
+  const { userId } = req;
+  const { id } = req.params;
+  const { description } = req.body;
+  await updatePost({ id, userId, description });
   res.redirect("/");
 });
 

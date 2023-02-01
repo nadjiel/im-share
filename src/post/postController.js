@@ -4,6 +4,7 @@ import { createPost } from "./createPost.js";
 import { deletePost } from "./deletePost.js";
 import { getAllPosts } from "./getAllPosts.js";
 import { getPost } from "./getPostById.js";
+import { updatePost } from "./updatePost.js";
 
 const router = Router();
 export const postController = router;
@@ -27,15 +28,9 @@ router.post("/", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
   const { id } = req.params;
-  const post = await db.post.findUnique({ where: { id } });
-
   const { userId } = req;
-  if (post.userId !== userId) {
-    throw new Error("Unauthorized post patch");
-  }
-
   const { description } = req.body;
-  await db.post.update({ where: { id }, data: { description } });
+  const post = await updatePost({ id, userId, description });
   res.json({ data });
 });
 
