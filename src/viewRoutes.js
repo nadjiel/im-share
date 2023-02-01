@@ -26,7 +26,15 @@ export const viewRoutes = routes;
 routes.use(authMiddleware);
 
 routes.get("/sign-in", async (req, res) => {
+  if (req.logged) {
+    res.redirect("/");
+  }
   res.render("pages/signIn");
+});
+
+routes.post("/logout", async (req, res) => {
+  res.clearCookie("Authorization");
+  res.redirect("/");
 });
 
 routes.get("/me", async (req, res) => {
