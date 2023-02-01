@@ -1,0 +1,18 @@
+{% extends "./_modal.njk" %}
+{% set modalId = "logout" %}
+{% block content %}
+    <div>Tem certeza que quer sair?</div>
+    <div class="text-sm">Para postar e comentar você precisará fazer login de novo</div>
+    <div class="flex-row justify-end">
+        <a 
+        href="#!" 
+        class='text-blue-500 font-semibold p-2 hover:bg-black/10 rounded-lg'>
+        Cancelar</a>
+        <form action="/logout" method="post">
+            <input
+            value="Sair"
+            type="submit" 
+            class="px-4 cursor-pointer text-blue-500 font-semibold p-2 hover:bg-black/10 rounded-lg"></input>
+        </form>
+    </div>
+{% endblock %}

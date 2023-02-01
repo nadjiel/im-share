@@ -16,12 +16,7 @@
       </div>
     </div>
     {% if user.id == userId %}
-      <form action="/logout" method="post" >
-        <button class="flex-row items-center hover:bg-black/10 p-2 rounded-lg cursor-pointer gap-1">
-          <i class="fa-solid fa-circle-xmark fa-lg opacity-50"></i>
-        Sair da conta
-      </button>
-      </form>
+      {% include 'components/_logoutButton.njk' %}
     {% endif %}
   </section>
   <div class="flex-col items-center">
