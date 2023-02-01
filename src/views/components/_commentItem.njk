@@ -11,7 +11,9 @@
             <a class="flex-row items-center gap-2" href="/@{{comment.user.username}}">
                 <div class="text-xs opacity-50">{{comment.user.name}}</div>
             </a>
-            {% include "./_commentButtons.njk" %}
+            {% if comment.userId == userId %}
+                {% include "./_commentButtons.njk" %}
+            {% endif %}
         </div>
         <div>{{comment.text}}</div>
     </div>
