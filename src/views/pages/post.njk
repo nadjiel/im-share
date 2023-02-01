@@ -32,9 +32,14 @@
                 {% endif %}
             </div>
             <ul class="gap-2">
-                {% for comment in post.comments %}
-                    {% include "../components/_commentItem.njk" %}
-                {% endfor %}
+
+                {% if post.comments.length %}
+                    {% for comment in post.comments %}
+                        {% include "../components/_commentItem.njk" %}
+                    {% endfor %}
+                {% else %}
+                    <div class="opacity-50">Seja o primeiro a comentar</div>
+                {% endif %}
             </ul>
             <div class="sticky bottom-0 pb-2 bg-white rounded-t-lg">
                 {% if logged %}
