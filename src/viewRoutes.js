@@ -59,7 +59,7 @@ routes.post("/post/:id/update", async (req, res) => {
   const { id } = req.params;
   const { description } = req.body;
   await updatePost({ id, userId, description });
-  res.redirect("/");
+  res.redirect("/post/" + id);
 });
 
 routes.post("/post/:postId/comment", async (req, res) => {
