@@ -14,6 +14,10 @@ export async function authMiddleware(req, res, next) {
     const userId = result.sub;
     req.userId = userId;
     req.logged = true;
+
+    // to frontend
+    res.locals.logged = true;
+    res.locals.userId = userId;
     return next();
   } catch (e) {
     return next();

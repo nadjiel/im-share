@@ -45,8 +45,7 @@ routes.get("/@:username", async (req, res) => {
 routes.get("/post/:id", async (req, res) => {
   const { id } = req.params;
   const post = await getPost(id);
-  const { logged, userId } = req;
-  res.render("pages/post", { post, logged, userId });
+  res.render("pages/post", { post });
 });
 
 routes.post("/post/:id/delete", async (req, res) => {

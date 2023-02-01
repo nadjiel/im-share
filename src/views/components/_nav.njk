@@ -11,10 +11,15 @@
             Publicar
     </a>
   {% endif %}
-  {% if not hideSignIn %}
-    <a href="/sign-in" class="p-2 rounded-lg flex-row items-center gap-1">
-      <i class="fa-solid fa-user"></i>
-            Entrar
+  {% if logged %}
+    <a href="/me" class="p-2 rounded-lg flex-row items-center gap-1">
+      <i class="fa-solid fa-user"></i> Perfil
     </a>
+    {%else%}
+    {% if not hideSignIn %}
+      <a href="/sign-in" class="p-2 rounded-lg flex-row items-center gap-1">
+        <i class="fa-solid fa-user"></i> Entrar
+      </a>
+    {% endif %}
   {% endif %}
 </nav>
