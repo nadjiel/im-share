@@ -1,10 +1,9 @@
 import { Router } from "express";
-import { db } from "../database/db.js";
+import { getPost } from "./getPostById.js";
 import { createPost } from "./createPost.js";
 import { deletePost } from "./deletePost.js";
-import { getAllPosts } from "./getAllPosts.js";
-import { getPost } from "./getPostById.js";
 import { updatePost } from "./updatePost.js";
+import { getAllPosts } from "./getAllPosts.js";
 
 const router = Router();
 export const postController = router;
@@ -22,7 +21,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { description, image } = req.body;
-  const post = createPost({ description, image });
+  const post = await createPost({ description, image });
   res.status(201).json(post);
 });
 
@@ -31,7 +30,7 @@ router.patch("/:id", async (req, res) => {
   const { userId } = req;
   const { description } = req.body;
   const post = await updatePost({ id, userId, description });
-  res.json({ data });
+  res.json(post);
 });
 
 router.delete("/:id", async (req, res) => {
