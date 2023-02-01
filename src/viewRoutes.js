@@ -15,6 +15,7 @@ import { createComment } from "./comment/createComment.js";
 import { deleteComment } from "./comment/deleteComment.js";
 import { getUserByUsername } from "./user/getUserByUsername.js";
 import { updateComment } from "./comment/updateComment.js";
+import { getUserById } from "./user/getUserById.js";
 
 dayjs.extend(duration);
 const oneWeekAsSeconds = dayjs.duration({ week: 1 }).asSeconds();
@@ -26,6 +27,11 @@ routes.use(authMiddleware);
 
 routes.get("/sign-in", async (req, res) => {
   res.render("pages/signIn");
+});
+
+routes.get("/me", async (req, res) => {
+  const user = await getUserById(req.userId);
+  res.redirect("/@" + user.username);
 });
 
 routes.post("/user", async (req, res) => {
