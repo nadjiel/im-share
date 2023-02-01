@@ -1,7 +1,7 @@
 import { db } from "../database/db.js";
 
 export async function updateUser({ id, name, email, username, picture }) {
-  const user = await db.user.findUnique({ where: { id } });
+  const user = await db.user.findUniqueOrThrow({ where: { id } });
 
   if (user.id !== id) {
     throw new Error("Unauthorized user patch");
