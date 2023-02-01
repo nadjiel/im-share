@@ -15,12 +15,14 @@
         <h2 class="text-xl">@{{user.username}}</h2>
       </div>
     </div>
-    <form action="/logout" method="post" >
-      <button class="flex-row items-center hover:bg-black/10 p-1 rounded-lg cursor-pointer gap-1">
-        <i class="fa-solid fa-circle-xmark fa-lg opacity-50"></i>
+    {% if user.id == userId %}
+      <form action="/logout" method="post" >
+        <button class="flex-row items-center hover:bg-black/10 p-2 rounded-lg cursor-pointer gap-1">
+          <i class="fa-solid fa-circle-xmark fa-lg opacity-50"></i>
         Sair da conta
       </button>
-    </form>
+      </form>
+    {% endif %}
   </section>
   <div class="flex-col items-center">
     <section class="grid gap-2 gap-y-4 md:gap-y-2 md:grid-cols-3 justify-center">
