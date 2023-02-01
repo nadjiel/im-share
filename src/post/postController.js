@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { db } from "../database/db.js";
 import { createPost } from "./createPost.js";
+import { deletePost } from "./deletePost.js";
 import { getAllPosts } from "./getAllPosts.js";
 import { getPost } from "./getPostById.js";
 
@@ -40,7 +41,8 @@ router.patch("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
-  const post = await db.post.findUniqueOrThrow({ where: { id } });
-  await db.post.delete(filter);
+  const { userId } = req;
+
+  await deletePost({ id, userId });
   res.send();
 });

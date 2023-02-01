@@ -6,12 +6,12 @@ import { CLOUDINARY_SECRET } from "./env.js";
 import duration from "dayjs/plugin/duration.js";
 import { getPost } from "./post/getPostById.js";
 import { createPost } from "./post/createPost.js";
+import { deletePost } from "./post/deletePost.js";
 import { getAllPosts } from "./post/getAllPosts.js";
 import { generateToken } from "./auth/generatedToken.js";
 import { authMiddleware } from "./auth/authMiddleware.js";
-import { getUserByUsername } from "./user/getUserByUsername.js";
-import { getUserById } from "./user/getUserById.js";
 import { createComment } from "./comment/createComment.js";
+import { getUserByUsername } from "./user/getUserByUsername.js";
 
 dayjs.extend(duration);
 const oneWeekAsSeconds = dayjs.duration({ week: 1 }).asSeconds();
@@ -30,7 +30,7 @@ routes.post("/user", async (req, res) => {
   const access = generateToken(user.id, oneWeekAsSeconds);
   const expires = dayjs().add(7, "days").toDate();
   res.cookie("Authorization", access, { expires });
-  res.render("pages/signIn");
+  res.redirect("/");
 });
 
 routes.get("/@:username", async (req, res) => {
@@ -42,8 +42,15 @@ routes.get("/@:username", async (req, res) => {
 routes.get("/post/:id", async (req, res) => {
   const { id } = req.params;
   const post = await getPost(id);
-  const { logged } = req;
-  res.render("pages/post", { post, logged });
+  const { logged, userId } = req;
+  res.render("pages/post", { post, logged, userId });
+});
+
+routes.post("/post/:id/delete", async (req, res) => {
+  const { id } = req.params;
+  const { userId } = req;
+  await deletePost({ id, userId });
+  res.redirect("/");
 });
 
 routes.post("/post/:postId/comment", async (req, res) => {

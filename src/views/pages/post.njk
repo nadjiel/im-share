@@ -20,7 +20,9 @@
                         src="{{post.user.picture}}"/>
                     <h2 class="text-lg">{{post.user.name}}</h2>
                 </a>
-                {% include "components/_postButtons.njk" %}
+                {% if post.userId == userId %}
+                    {% include "components/_postButtons.njk" %}
+                {% endif %}
             </div>
             <div class="flex-1">
                 {% if post.description %}

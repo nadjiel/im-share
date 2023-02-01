@@ -4,7 +4,11 @@
     <div>
         Você deseja mesmo remover essa postagem?
         <div class="flex-row justify-end">
-            <a href="#!" class='text-blue-500 font-semibold p-2 hover:bg-black/10 rounded-lg'>Cancelar</a>
+            <a 
+                href="#!" 
+                class='text-blue-500 font-semibold p-2 hover:bg-black/10 rounded-lg'>
+                Cancelar
+            </a>
             <form action="/post/{{post.id}}/delete" method="post">
                 <input type="submit" value="Remover" class="cursor-pointer text-blue-500 font-semibold p-2 hover:bg-black/10 rounded-lg"></input>
             </form>
