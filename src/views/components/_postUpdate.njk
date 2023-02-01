@@ -1,7 +1,17 @@
 {% extends "./_modal.njk" %}
 {% set modalId = "update" %}
 {% block content %}
-    <div>
-        hello
-    </div>
+    <form action="/post/{{post.id}}/update" method="post">
+        <label>Descrição
+        <textarea
+            rows="4"
+            name="description"
+            placeholder="Escrever algo"
+            class="border-2 p-2 rounded-lg w-full"
+        >{{post.description}}</textarea>
+        </label>
+        <button class="bg-blue-500 p-2 rounded-lg flex-row text-white items-center gap-1 justify-center">
+            Salvar
+        </button>
+    </form>
 {% endblock %}
