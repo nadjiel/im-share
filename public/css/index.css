@@ -39,14 +39,12 @@ span {
   padding: 0.5rem;
 }
 
-.button {
-  @apply cursor-pointer;
-}
-
 .common-button:hover {
   background: #8888;
 }
 
-.secondary-button {
-  @apply text-blue-600;
+a,
+button,
+input {
+  cursor: pointer;
 }

@@ -29,9 +29,14 @@ routes.use(authMiddleware);
 
 routes.get("/sign-in", async (req, res) => {
   if (req.logged) {
-    res.redirect("/");
+    return res.redirect("/");
   }
   res.render("pages/signIn");
+});
+
+routes.get("/profile", async (req, res) => {
+  const user = await getUserById(req.userId);
+  return res.render("pages/profile", { user });
 });
 
 routes.post("/logout", async (req, res) => {

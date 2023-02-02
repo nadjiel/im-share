@@ -1,0 +1,37 @@
+{% extends "../layout.njk" %}
+
+{% set title = "Editar perfil" %}
+
+{% block content %}
+    <form class="items-center self-center w-full max-w-sm" id="profile-form" style="">
+        <div>
+            <img src="{{user.picture}}" class="rounded-full"></img>
+            <label for="name" class="text-center" style="margin-top:0;">Foto</label>
+        </div>
+        <label for="name">Nome</label>
+        <input name="name" value="{{user.name}}" required type="text"></input>
+        <label for="username">Apelido</label>
+        <input name="username" value="{{user.username}}" required type="text" class="w-full"></input>
+        <label for="bio" class="self-start pt-2">Bio</label>
+        <textarea name="bio" value="{{user.bio}}"></textarea>
+        <div></div>
+        <button class="mt-4 bg-blue-500 p-2 px-10 rounded-lg flex-row text-white items-center gap-1 justify-center">
+            Salvar
+        </button>
+    </form>
+    <style>
+        #profile-form label {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        #profile-form input,
+        #profile-form textarea {
+            width: 100%;
+            padding: 0.25rem;
+            border-radius: 0.5rem;
+            border: solid 2px #0002;
+        }
+    </style>
+{% endblock %}
+
+{% block script %}{% endblock %}
