@@ -1,4 +1,4 @@
-import "./configUpload.js";
+import "./configureUpload.js";
 import { Router } from "express";
 import { getSignature } from "./getSignature.js";
 

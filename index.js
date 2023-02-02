@@ -1,4 +1,5 @@
 import "express-async-errors";
+import "./src/upload/configureUpload.js";
 import cors from "cors";
 import express from "express";
 import nunjucks from "nunjucks";
