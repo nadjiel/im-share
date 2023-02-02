@@ -36,7 +36,15 @@ router.post("/", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   const { id } = req.params;
   const { userId } = req;
-  const post = await updatePost({ ...req.body, id, userId });
+
+  let image = undefined;
+  const { publicId, version, signature } = req.body;
+  if (publicId) {
+    validateSignature({ publicId, signature, version });
+    image = publicId;
+  }
+
+  const post = await updatePost({ ...req.body, id, userId, image });
   res.json(post);
 });
 
