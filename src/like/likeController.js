@@ -17,8 +17,8 @@ router.delete("/:id", async (req, res) => {
 
   const { userId } = req;
   if (like.userId !== userId) {
-    throw new Error("Unauthorized post patch");
+    throw new Error("Unauthorized like patch");
   }
 
-  db.like.delete({ where: { id } });
+  await db.like.delete({ where: { id } });
 });
