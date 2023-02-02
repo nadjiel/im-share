@@ -21,6 +21,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { description, image } = req.body;
+  // todo add image by signature
   const post = await createPost({ description, image });
   res.status(201).json(post);
 });
@@ -28,8 +29,7 @@ router.post("/", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   const { id } = req.params;
   const { userId } = req;
-  const { description } = req.body;
-  const post = await updatePost({ id, userId, description });
+  const post = await updatePost({ ...req.body, id, userId });
   res.json(post);
 });
 
