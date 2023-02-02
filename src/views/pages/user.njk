@@ -29,14 +29,18 @@
       {% endif %}
     </section>
     <div class="flex-col items-center">
-      <section class="grid gap-2 gap-y-4 md:gap-y-2 md:grid-cols-3 justify-center">
-        {% for post in user.posts %}
-          {% include "../components/_postItem.njk" %}
-        {% endfor %}
-        {% for comment in user.comments %}
-          {% include "../components/_commentAt.njk" %}
-        {% endfor %}
-      </section>
+      {% if user.posts.length %}
+        <section class="grid gap-2 gap-y-4 md:gap-y-2 md:grid-cols-3 justify-center">
+          {% for post in user.posts %}
+            {% include "../components/_postItem.njk" %}
+          {% endfor %}
+          {% for comment in user.comments %}
+            {% include "../components/_commentAt.njk" %}
+          {% endfor %}
+        </section>
+      {% else %}
+        <span class="opacity-50">Sem postagens</span>
+      {% endif %}
     </div>
   </div>
 {% endblock %}
