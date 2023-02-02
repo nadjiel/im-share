@@ -18,6 +18,7 @@ import { updateComment } from "./comment/updateComment.js";
 import { getUserById } from "./user/getUserById.js";
 import { updateUser } from "./user/updateUser.js";
 import { deleteUser } from "./user/deleteUser.js";
+import { validateSignature } from "./upload/validateSignature.js";
 
 dayjs.extend(duration);
 const oneWeekAsSeconds = dayjs.duration({ week: 1 }).asSeconds();
@@ -130,14 +131,8 @@ routes.get("/publish", async (req, res) => {
 
 routes.post("/publish", async (req, res) => {
   const { publicId, version, signature } = req.body;
-  const expectedSignature = v2.utils.api_sign_request(
-    { public_id: publicId, version },
-    CLOUDINARY_SECRET
-  );
+  validateSignature({ publicId, signature, version });
 
-  if (expectedSignature !== signature) {
-    throw Error("Invalid image signature");
-  }
   const { description } = req.body;
   const image = publicId;
   const { userId } = req;
