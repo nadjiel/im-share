@@ -22,7 +22,11 @@
       {% endif %}
     </section>
     <section class="self-center max-w-2xl">
-      {{user.bio}}
+      {% if user.bio %}
+        {{user.bio}}
+      {% else %}
+        <span class="opacity-50">Sem bio</span>
+      {% endif %}
     </section>
     <div class="flex-col items-center">
       <section class="grid gap-2 gap-y-4 md:gap-y-2 md:grid-cols-3 justify-center">
