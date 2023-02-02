@@ -107,7 +107,8 @@ routes.post("/comment/:id/update", async (req, res) => {
 
 routes.post("/user/:id/update", async (req, res) => {
   const { id } = req.params;
-  const user = await updateUser({ ...req.body, id });
+  const { userId } = req;
+  const user = await updateUser({ ...req.body, id, userId });
   res.redirect("/@" + user.username);
 });
 

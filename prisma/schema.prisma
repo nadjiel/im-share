@@ -10,6 +10,7 @@ datasource db {
 model User {
   id               String         @id @default(uuid())
   name             String
+  bio              String?
   email            String         @unique
   picture          String
   username         String         @unique
