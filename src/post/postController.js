@@ -20,8 +20,15 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { description, image } = req.body;
-  // todo add image by signature
+  const { description } = req.body;
+
+  let image = undefined;
+  const { publicId, version, signature } = req.body;
+  if (publicId) {
+    validateSignature({ publicId, signature, version });
+    image = publicId;
+  }
+
   const post = await createPost({ description, image });
   res.status(201).json(post);
 });
