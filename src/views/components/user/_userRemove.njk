@@ -1,17 +1,26 @@
 {% extends "../_modal.njk" %}
 {% set modalId = "remove" %}
 {% block content %}
-    <div>
-        Você deseja mesmo remover seu usuário?
-        <div class="flex-row justify-end">
-            <a 
-                href="#!" 
-                class='text-blue-500 font-semibold p-2 hover:bg-black/10 rounded-lg'>
-                Cancelar
-            </a>
-            <form action="/user/{{user.id}}/delete" method="post">
-                <input type="submit" value="Remover" class="cursor-pointer text-blue-500 font-semibold p-2 hover:bg-black/10 rounded-lg"></input>
-            </form>
+    <div class="block">
+        <div>
+            Você deseja mesmo remover sua conta permanentemente?
+        </div>
+        <div class="font-semibold">
+            Isso vai apagar todos os seus dados.
+        </div>
+        <div class="font-semibold">
+            E não pode ser desfeito.
         </div>
     </div>
+    <div class="flex-row justify-end">
+        <form action="/user/{{user.id}}/delete" method="post">
+            <button class="cursor-pointer text-red-500 font-semibold p-2 hover:bg-black/10 rounded-lg">
+                Remover
+            </button>
+        </form>
+        <a href="#!" class='text-blue-500 font-semibold p-2 hover:bg-black/10 rounded-lg'>
+            Cancelar
+        </a>
+    </div>
+</div>
 {% endblock %}

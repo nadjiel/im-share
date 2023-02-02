@@ -5,8 +5,9 @@
 {% block content %}
     <form 
         method="post"
+        id="profile-form"
         action="/user/{{user.id}}/update"
-        class="items-center self-center w-full max-w-sm" id="profile-form">
+        class="items-center self-center w-full max-w-sm p-2">
         <div>
             <img src="{{user.picture}}" class="rounded-full"></img>
             <label for="name" class="text-center" style="margin-top:0;">Foto</label>
@@ -22,6 +23,10 @@
             Salvar
         </button>
     </form>
+    <a href="#remove" class="text-red-500 p-2 mt-10 common-button absolute bottom-0 right-0 rounded-lg flex-row items-center gap-1">
+        <i class="fa-solid fa-trash"></i>
+        Remover conta
+    </a>
     <style>
         #profile-form label {
             width: 100%;
@@ -35,6 +40,6 @@
             border: solid 2px #0002;
         }
     </style>
+    {% include "components/user/_userRemove.njk" %}
 {% endblock %}
-
 {% block script %}{% endblock %}
