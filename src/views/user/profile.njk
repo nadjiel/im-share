@@ -5,35 +5,59 @@
 {% block content %}
     <form 
         method="post"
-        id="profile-form"
+        id="form-with-image"
         action="/user/{{user.id}}/update"
-        class="items-center self-center w-full max-w-sm p-2">
-        <div>
-            <img width="96" height="96" src="{{imageServer}}/w_96/v1675078381/{{user.picture}}" class="rounded-full"></img>
-            <label for="name" class="text-center" style="margin-top:0;">Foto</label>
-        </div>
-        <label for="name">Nome</label>
-        <input name="name" value="{{user.name}}" required type="text"></input>
-        <label for="username">Apelido</label>
-        <input name="username" value="{{user.username}}" required type="text" class="w-full"></input>
-        <label for="bio" class="self-start pt-2">Bio</label>
-        <textarea name="bio">{{user.bio}}</textarea>
-        <div></div>
-        <button class="mt-4 bg-blue-500 p-2 px-10 rounded-lg flex-row text-white items-center gap-1 justify-center">
+        class="items-center self-center gap-4 w-full max-w-sm p-2">
+        <label class="items-center" style="width: fit-content;">
+            <div class="relative rounded-full overflow-hidden">
+                <input 
+                required
+                type='file'
+                id='file-input'
+                accept="image/gif, image/jpeg, image/png, image/webp"
+                class="absolute inset-0 w-full h-full text-transparent text-[0rem] cursor-pointer rounded-full opacity-0"
+                ></input>
+                <img 
+                width="96"
+                height="96"
+                id="image-display"
+                class="rounded-full object-cover w-24 h-24"
+                src="{{imageServer}}/w_96/v1675078381/{{user.picture}}"></img>
+            </div>
+            Foto
+        </label>
+        <label>
+            Nome
+            <input name="name" value="{{user.name}}" required type="text"></input>
+        </label>
+        <label>
+            Apelido
+            <input name="username" value="{{user.username}}" required type="text" class="w-full"></input>
+        </label>
+        <label>
+            Bio
+            <textarea name="bio">{{user.bio}}</textarea>
+        </label>
+        <button 
+            id="submit-input"
+            class="mt-4 bg-blue-500 p-2 px-10 rounded-lg flex-row text-white items-center gap-1 justify-center">
             Salvar
         </button>
+        <input type="hidden" id="version-input" name="version"></input>
+        <input type="hidden" id="publicId-input" name="publicId"></input>
+        <input type="hidden" id="signature-input" name="signature"></input>
     </form>
     <a href="#remove" class="text-red-500 p-2 mt-10 common-button absolute bottom-0 right-0 rounded-lg flex-row items-center gap-1">
         <i class="fa-solid fa-trash"></i>
         Remover conta
     </a>
     <style>
-        #profile-form label {
+        label {
             width: 100%;
-            margin-top: 1rem;
+            cursor: pointer;
         }
-        #profile-form input,
-        #profile-form textarea {
+        input,
+        textarea {
             width: 100%;
             padding: 0.25rem;
             border-radius: 0.5rem;
@@ -41,5 +65,7 @@
         }
     </style>
     {% include "user/_userRemove.njk" %}
+    <script src="js/publishForm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" async></script>
 {% endblock %}
 {% block script %}{% endblock %}

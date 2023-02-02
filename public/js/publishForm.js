@@ -3,8 +3,8 @@ const apiKey = "378278351497316";
 
 const fileInput = document.querySelector("#file-input");
 const submitInput = document.querySelector("#submit-input");
-const publishForm = document.querySelector("#publish-form");
 const imageDisplay = document.querySelector("#image-display");
+const publishForm = document.querySelector("#form-with-image");
 const imagePlaceholder = document.querySelector("#image-placeholder");
 
 const versionInput = document.querySelector("#version-input");
@@ -18,7 +18,9 @@ function handleFileChange(e) {
   const file = e.srcElement.files[0];
   const reader = new FileReader();
   reader.onloadend = () => {
-    imagePlaceholder.remove();
+    if (imagePlaceholder) {
+      imagePlaceholder.remove();
+    }
     imageDisplay.src = reader.result;
   };
   reader.readAsDataURL(file);
