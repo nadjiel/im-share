@@ -37,14 +37,7 @@ router.patch("/:id", async (req, res) => {
   const { id } = req.params;
   const { userId } = req;
 
-  let image = undefined;
-  const { publicId, version, signature } = req.body;
-  if (publicId) {
-    validateSignature({ publicId, signature, version });
-    image = publicId;
-  }
-
-  const post = await updatePost({ ...req.body, id, userId, image });
+  const post = await updatePost({ ...req.body, id, userId, image: undefined });
   res.json(post);
 });
 
