@@ -23,7 +23,15 @@ router.get("/:id", async function (req, res) {
 router.patch("/:id", async function (req, res) {
   const { id } = req.params;
   const { userId } = req;
-  const user = await updateUser({ ...req.body, id, userId });
+
+  let picture = undefined;
+  const { publicId, version, signature } = req.body;
+  if (publicId) {
+    validateSignature({ publicId, signature, version });
+    picture = publicId;
+  }
+
+  const user = await updateUser({ ...req.body, id, userId, picture });
   res.json(user);
 });
 
