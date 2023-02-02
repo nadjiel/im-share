@@ -3,7 +3,10 @@
 {% set title = "Editar perfil" %}
 
 {% block content %}
-    <form class="items-center self-center w-full max-w-sm" id="profile-form" style="">
+    <form 
+        method="post"
+        action="/user/{{user.id}}/update"
+        class="items-center self-center w-full max-w-sm" id="profile-form">
         <div>
             <img src="{{user.picture}}" class="rounded-full"></img>
             <label for="name" class="text-center" style="margin-top:0;">Foto</label>
