@@ -86,7 +86,8 @@ routes.post("/comment/:id/delete", async (req, res) => {
 
 routes.post("/user/:id/delete", async (req, res) => {
   const { id } = req.params;
-  const user = await deleteUser({ id });
+  await deleteUser({ id });
+  res.clearCookie("Authorization");
   res.redirect("/");
 });
 
