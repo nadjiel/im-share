@@ -17,8 +17,8 @@
         </div>
       </div>
       {% if user.id == userId %}
+        {% include "components/user/_profileButton.njk" %}
         {% include 'components/_logoutButton.njk' %}
-        {% include "components/user/_userConfig.njk" %}
       {% endif %}
     </section>
     <section class="self-center max-w-2xl">
