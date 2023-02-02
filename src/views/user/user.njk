@@ -1,4 +1,4 @@
-{% extends "../layout.njk" %}
+{% extends "layout.njk" %}
 
 {% set title = "Usuário" %}
 
@@ -17,8 +17,8 @@
         </div>
       </div>
       {% if user.id == userId %}
-        {% include "components/user/_profileButton.njk" %}
-        {% include 'components/_logoutButton.njk' %}
+        {% include "user/_profileButton.njk" %}
+        {% include 'auth/_logoutButton.njk' %}
       {% endif %}
     </section>
     <section class="self-center max-w-2xl">
@@ -32,10 +32,10 @@
       {% if user.posts.length %}
         <section class="grid gap-2 gap-y-4 md:gap-y-2 md:grid-cols-3 justify-center">
           {% for post in user.posts %}
-            {% include "../components/_postItem.njk" %}
+            {% include "post/_postItem.njk" %}
           {% endfor %}
           {% for comment in user.comments %}
-            {% include "../components/_commentAt.njk" %}
+            {% include "comment/_commentAt.njk" %}
           {% endfor %}
         </section>
       {% else %}

@@ -1,17 +1,18 @@
-{% extends "./_modal.njk" %}
-{% set modalId = "update-"+comment.id %}
+{% extends "_modal.njk" %}
+{% set modalId = "update" %}
 {% block content %}
     <form
-    method="post"
     class="gap-2"
-    action="/comment/{{comment.id}}/update">
-        <label>Comentário
-        <textarea
-            rows="4"
-            name="text"
+    method="post"
+    action="/user/{{user.id}}/update">
+        <label>Nome de Usuário
+        <input
+            type="text"
+            value={{user.name}}
+            name="name"
             placeholder="Escrever algo"
             class="border-2 p-2 rounded-lg w-full"
-        >{{comment.text}}</textarea>
+/>
         </label>
         <button class="bg-blue-500 p-2 rounded-lg flex-row text-white items-center gap-1 justify-center">
             Salvar

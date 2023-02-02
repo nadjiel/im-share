@@ -1,4 +1,4 @@
-{% extends "../layout.njk" %}
+{% extends "layout.njk" %}
 
 {% set title = "Editar perfil" %}
 
@@ -40,6 +40,6 @@
             border: solid 2px #0002;
         }
     </style>
-    {% include "components/user/_userRemove.njk" %}
+    {% include "user/_userRemove.njk" %}
 {% endblock %}
 {% block script %}{% endblock %}

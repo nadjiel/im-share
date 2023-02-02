@@ -12,7 +12,7 @@
                 <div class="text-xs opacity-50">{{comment.user.name}}</div>
             </a>
             {% if comment.userId == userId %}
-                {% include "./_commentButtons.njk" %}
+                {% include "comment/_commentButtons.njk" %}
             {% endif %}
         </div>
         <div>{{comment.text}}</div>

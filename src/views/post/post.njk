@@ -1,4 +1,4 @@
-{% extends "../layout.njk" %}
+{% extends "layout.njk" %}
 {% set title = post.description or "Post" %}
 {% set navPosition = 'fixed' %}
 {% block content %}
@@ -21,7 +21,7 @@
                     <h2 class="text-lg">{{post.user.name}}</h2>
                 </a>
                 {% if post.userId == userId %}
-                    {% include "components/_postButtons.njk" %}
+                    {% include "post/_postButtons.njk" %}
                 {% endif %}
             </div>
             <div class="flex-1">
@@ -34,7 +34,7 @@
             <ul class="gap-2">
                 {% if post.comments.length %}
                     {% for comment in post.comments %}
-                        {% include "../components/_commentItem.njk" %}
+                        {% include "comment/_commentItem.njk" %}
                     {% endfor %}
                 {% else %}
                     <div class="opacity-50">Seja o primeiro a comentar</div>
@@ -42,7 +42,7 @@
             </ul>
             <div class="sticky bottom-0 pb-2 bg-white rounded-t-lg">
                 {% if logged %}
-                    {% include "components/_commentInput.njk" %}
+                    {% include "comment/_commentInput.njk" %}
                 {% else %}
                     <div class="block bg-gray-200 rounded-lg p-2">
                     Faça <a href="/sign-in" class="text-blue-500 inline underline">login</a> para comentar

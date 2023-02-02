@@ -31,12 +31,12 @@ routes.get("/sign-in", async (req, res) => {
   if (req.logged) {
     return res.redirect("/");
   }
-  res.render("pages/signIn");
+  res.render("auth/signIn");
 });
 
 routes.get("/profile", async (req, res) => {
   const user = await getUserById(req.userId);
-  return res.render("pages/profile", { user });
+  return res.render("user/profile", { user });
 });
 
 routes.post("/logout", async (req, res) => {
@@ -61,13 +61,13 @@ routes.get("/@:username", async (req, res) => {
   const { username } = req.params;
   const { userId } = req;
   const user = await getUserByUsername(username);
-  res.render("pages/user", { user, userId });
+  res.render("user/user", { user, userId });
 });
 
 routes.get("/post/:id", async (req, res) => {
   const { id } = req.params;
   const post = await getPost(id);
-  res.render("pages/post", { post });
+  res.render("post/post", { post });
 });
 
 routes.post("/post/:id/delete", async (req, res) => {
@@ -125,7 +125,7 @@ routes.get("/publish", async (req, res) => {
   if (!req.userId) {
     return res.redirect("/sign-in");
   }
-  res.render("pages/publish");
+  res.render("post/publish");
 });
 
 routes.post("/publish", async (req, res) => {
@@ -148,9 +148,9 @@ routes.post("/publish", async (req, res) => {
 
 routes.get("/", async (req, res) => {
   let posts = await getAllPosts();
-  res.render("pages/index", { posts });
+  res.render("post/home", { posts });
 });
 
 routes.use(async (req, res) => {
-  res.status(404).render("pages/notFound");
+  res.status(404).render("common/notFound");
 });
