@@ -50,11 +50,12 @@ async function uploadImage() {
 async function handleSubmit(e) {
   e.preventDefault();
 
-  const uploadRes = await uploadImage();
-
-  versionInput.value = uploadRes.data.version;
-  publicIdInput.value = uploadRes.data.public_id;
-  signatureInput.value = uploadRes.data.signature;
+  if (fileInput.files.length) {
+    const uploadRes = await uploadImage();
+    versionInput.value = uploadRes.data.version;
+    publicIdInput.value = uploadRes.data.public_id;
+    signatureInput.value = uploadRes.data.signature;
+  }
 
   publishForm.submit();
 }
