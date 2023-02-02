@@ -1,6 +1,6 @@
 import { db } from "../database/db.js";
 
-export async function updateUser({ id, bio, name, userId, username }) {
+export async function updateUser({ id, bio, name, userId, picture, username }) {
   const user = await db.user.findUniqueOrThrow({ where: { id } });
 
   if (user.id !== userId) {
@@ -9,6 +9,6 @@ export async function updateUser({ id, bio, name, userId, username }) {
 
   return await db.user.update({
     where: { id },
-    data: { bio, name, username },
+    data: { bio, name, picture, username },
   });
 }

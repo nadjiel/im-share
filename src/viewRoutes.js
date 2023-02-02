@@ -111,7 +111,15 @@ routes.post("/comment/:id/update", async (req, res) => {
 routes.post("/user/:id/update", async (req, res) => {
   const { id } = req.params;
   const { userId } = req;
-  const user = await updateUser({ ...req.body, id, userId });
+
+  let picture = undefined;
+  const { publicId, version, signature } = req.body;
+  if (publicId) {
+    validateSignature({ publicId, signature, version });
+    picture = publicId;
+  }
+
+  const user = await updateUser({ ...req.body, picture, id, userId });
   res.redirect("/@" + user.username);
 });
 
@@ -132,10 +140,10 @@ routes.get("/publish", async (req, res) => {
 routes.post("/publish", async (req, res) => {
   const { publicId, version, signature } = req.body;
   validateSignature({ publicId, signature, version });
-
-  const { description } = req.body;
   const image = publicId;
+
   const { userId } = req;
+  const { description } = req.body;
 
   const post = await createPost({ image, userId, description });
   res.redirect("/post/" + post.id);
