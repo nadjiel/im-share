@@ -8,6 +8,7 @@
         src="{{imageServer}}/w_96,h_96,c_fill,g_face/v1675078381/{{post.user.picture}}"></img>
       <h2 class="text-lg">{{post.user.name}}</h2>
     </a>
+    <span>{{post.createdAt.toLocaleDateString()}}</span>
   </div>
   <a href="/post/{{post.id}}" class='gap-1'>
     <img
