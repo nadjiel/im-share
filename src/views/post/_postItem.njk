@@ -11,11 +11,11 @@
     <span class="text-sm">{{post.createdAt.toLocaleDateString()}}</span>
   </div>
   <a href="/post/{{post.id}}" class='gap-1'>
-    <picture class="relative">
+    <picture class="relative group">
       <img
-        class="w-full md:rounded-lg bg-gray-200 md:object-cover peer" 
+        class="w-full md:rounded-lg bg-gray-200 md:object-cover" 
         src="{{imageServer}}/w_512/v1675078381/{{post.image}}"></img>
-      <div class="hidden peer-hover:flex absolute bottom-0 right-0 text-white bg-black/50 p-4 text-lg rounded-tl-lg rounded-br-lg">Visualizar post</div>
+      <div class="opacity-0 group-hover:opacity-100 transition-all duration-100 absolute bottom-0 right-0 text-white bg-black/50 p-4 text-lg rounded-tl-lg rounded-br-lg">Visualizar post</div>
     </picture>
     <div class="px-2 md:px-0 gap-2">
       <div>{{post.description}}</div>
