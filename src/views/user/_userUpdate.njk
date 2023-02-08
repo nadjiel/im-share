@@ -11,12 +11,15 @@
             accept="image/gif, image/jpeg, image/png, image/webp"
             class="absolute inset-0 w-full h-full text-transparent text-[0rem] cursor-pointer rounded-full opacity-0"
             ></input>
-            <img 
-            width="96"
-            height="96"
-            id="image-display"
-            class="rounded-full object-cover w-24 h-24"
-            src='{{imageServer}}/w_96,h_96,c_fill,g_face/v1675078381/{{user.picture}}'></img>
+            <picture class="relative group">
+                <img 
+                width="96"
+                height="96"
+                id="image-display"
+                class="rounded-full object-cover w-24 h-24"
+                src='{{imageServer}}/w_96,h_96,c_fill,g_face/v1675078381/{{user.picture}}'></img>
+                <span class="opacity-0 group-hover:opacity-100 transition-all duration-100 absolute inset-0 h-full w-full text-white bg-black/70 flex justify-center items-center text-base font-semibold rounded-full">Editar</span>
+            </picture>
         </div>
         Foto
     </label>
