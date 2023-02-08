@@ -1,20 +1,43 @@
-{% extends "_modal.njk" %}
-{% set modalId = "update" %}
-{% block content %}
-    <form
-    class="gap-2"
+<form 
     method="post"
-    action="/user/{{user.id}}/update">
-        <label>Nome de Usuário
-        <input
-            type="text"
-            value={{user.name}}
-            name="name"
-            placeholder="Escrever algo"
-            class="border-2 p-2 rounded-lg w-full"></input>
-        </label>
-        <button class="bg-blue-500 p-2 rounded-lg flex-row text-white items-center gap-1 justify-center">
-            Salvar
-        </button>
-    </form>
-{% endblock %}
+    id="form-with-image"
+    action="/user/{{user.id}}/update"
+    class="items-center self-center gap-4 w-full max-w-sm p-2">
+    <label class="items-center" style="width: fit-content;">
+        <div class="relative rounded-full overflow-hidden">
+            <input 
+            type='file'
+            id='file-input'
+            accept="image/gif, image/jpeg, image/png, image/webp"
+            class="absolute inset-0 w-full h-full text-transparent text-[0rem] cursor-pointer rounded-full opacity-0"
+            ></input>
+            <img 
+            width="96"
+            height="96"
+            id="image-display"
+            class="rounded-full object-cover w-24 h-24"
+            src='{{imageServer}}/w_96,h_96,c_fill,g_face/v1675078381/{{user.picture}}'></img>
+        </div>
+        Foto
+    </label>
+    <label>
+        Nome
+        <input name="name" value="{{user.name}}" required type="text"></input>
+    </label>
+    <label>
+        Apelido
+        <input name="username" value="{{user.username}}" required type="text" class="w-full"></input>
+    </label>
+    <label>
+        Bio
+        <textarea name="bio">{{user.bio}}</textarea>
+    </label>
+    <button 
+        id="submit-input"
+        class="mt-4 bg-blue-500 p-2 px-10 rounded-lg flex-row text-white items-center gap-1 justify-center hover:shadow-lg">
+        Salvar
+    </button>
+    <input type="hidden" id="version-input" name="version"></input>
+    <input type="hidden" id="publicId-input" name="publicId"></input>
+    <input type="hidden" id="signature-input" name="signature"></input>
+</form>

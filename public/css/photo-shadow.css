@@ -1,0 +1,25 @@
+.photo-shadow {
+    position: relative;
+}
+
+.photo-shadow::after {
+    content: "Visualizar Post";
+    background: #00000099;
+    border-radius: 8px;
+    font-size: 24px;
+    color: #fff;
+
+    opacity: 0;
+    visibility: 0;
+    position: absolute;
+    top: 0; right: 0; left: 0; bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo-shadow:hover::after {
+    transition: .25s ease-in-out;
+    opacity: 1;
+}

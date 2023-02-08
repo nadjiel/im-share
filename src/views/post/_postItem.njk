@@ -1,18 +1,22 @@
-<article class="gap-1 md:max-w-[25vw]">
+<article class="gap-2 md:max-w-[25vw]">
   <div class="flex-row justify-between items-center">
     <a class="flex-row items-center gap-2" href="/@{{post.user.username}}">
       <img 
         width="32"
         height="32"
-        class="rounded-full"
+        class="rounded-full hover:grayscale-[15%]"
         src="{{imageServer}}/w_96,h_96,c_fill,g_face/v1675078381/{{post.user.picture}}"></img>
       <h2 class="text-lg">{{post.user.name}}</h2>
     </a>
+    <span class="date">{{post.createdAt.toLocaleDateString()}}</span>
   </div>
   <a href="/post/{{post.id}}" class='gap-1'>
-    <img
-      class="w-full md:rounded-lg bg-gray-200 md:object-cover" 
-      src="{{imageServer}}/w_512/v1675078381/{{post.image}}"></img>
+    <picture class="photo-shadow">
+      <img
+        class="w-full md:rounded-lg bg-gray-200 md:object-cover" 
+        src="{{imageServer}}/w_512/v1675078381/{{post.image}}">
+      </img>
+    </picture>
     <div class="px-2 md:px-0 gap-2">
       <div>{{post.description}}</div>
     </div>
