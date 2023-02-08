@@ -11,10 +11,11 @@
     <span class="text-sm">{{post.createdAt.toLocaleDateString()}}</span>
   </div>
   <a href="/post/{{post.id}}" class='gap-1'>
-    <picture class="photo-shadow">
+    <picture class="relative">
       <img
-        class="w-full md:rounded-lg bg-gray-200 md:object-cover" 
+        class="w-full md:rounded-lg bg-gray-200 md:object-cover peer" 
         src="{{imageServer}}/w_512/v1675078381/{{post.image}}"></img>
+      <div class="hidden peer-hover:flex absolute bottom-0 right-0 text-white bg-black/50 p-4 text-lg rounded-tl-lg rounded-br-lg">Visualizar post</div>
     </picture>
     <div class="px-2 md:px-0 gap-2">
       <div>{{post.description}}</div>
