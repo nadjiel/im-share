@@ -11,9 +11,12 @@
     <span class="date">{{post.createdAt.toLocaleDateString()}}</span>
   </div>
   <a href="/post/{{post.id}}" class='gap-1'>
-    <img
-      class="w-full md:rounded-lg bg-gray-200 md:object-cover hover:shadow-lg" 
-      src="{{imageServer}}/w_512/v1675078381/{{post.image}}"></img>
+    <picture class="photo-shadow">
+      <img
+        class="w-full md:rounded-lg bg-gray-200 md:object-cover" 
+        src="{{imageServer}}/w_512/v1675078381/{{post.image}}">
+      </img>
+    </picture>
     <div class="px-2 md:px-0 gap-2">
       <div>{{post.description}}</div>
     </div>
