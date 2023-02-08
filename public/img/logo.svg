@@ -2,18 +2,19 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="60.546932mm"
-   height="26.796915mm"
-   viewBox="0 0 60.546932 26.796915"
+   width="51.786232mm"
+   height="10.358789mm"
+   viewBox="0 0 51.786232 10.358789"
    version="1.1"
    id="svg5"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    sodipodi:docname="logo.svg"
-   inkscape:export-filename="/home/yolisses/IFPB/BackEnd-RedeSorcial/public/img/logo.png"
-   inkscape:export-xdpi="107.10934"
-   inkscape:export-ydpi="107.10934"
+   inkscape:export-filename="/home/yolisses/IFPB/PW1/projeto/BackEnd-RedeSorcial/public/img/logo.png"
+   inkscape:export-xdpi="250.10645"
+   inkscape:export-ydpi="250.10645"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
@@ -30,9 +31,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="1.5606026"
-     inkscape:cx="105.408"
-     inkscape:cy="122.38862"
+     inkscape:zoom="1.8706556"
+     inkscape:cx="86.867939"
+     inkscape:cy="-29.401456"
      inkscape:window-width="1366"
      inkscape:window-height="731"
      inkscape:window-x="0"
@@ -40,27 +41,104 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
-     id="defs2" />
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient9596">
+      <stop
+         style="stop-color:#000000;stop-opacity:1"
+         offset="0"
+         id="stop9592" />
+      <stop
+         style="stop-color:#00368c;stop-opacity:1"
+         offset="1"
+         id="stop9594" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient9099">
+      <stop
+         style="stop-color:#00b243;stop-opacity:1"
+         offset="0"
+         id="stop9095" />
+      <stop
+         style="stop-color:#0000ff;stop-opacity:0;"
+         offset="1"
+         id="stop9097" />
+    </linearGradient>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath6758">
+      <path
+         style="fill:#008000;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 52.247914,116.26103 0.739134,-5.50632 c 0.0079,-0.0589 0.214398,-0.0823 0.266859,-0.11006 0.145791,-0.0771 0.731065,-0.53008 0.810236,-0.68748 0.03974,-0.079 0.13003,-0.16214 0.171281,-0.24464 0.0389,-0.0778 -0.05081,-0.0229 0.02455,-0.0982 0.04547,-0.0455 0.343702,-0.0892 0.391769,-0.0734 0.182655,0.0602 0.399759,0.30962 0.560678,0.43836 0.184484,0.14758 0.282094,0.62589 0.528551,0.6567 0.08933,0.0112 0.180747,0.0112 0.270078,0 0.242258,-0.0303 0.604941,-0.44316 0.853594,-0.19451 0.168582,0.16859 0.252561,0.38674 0.368289,0.58927 0.06759,0.11827 0.164767,0.23606 0.245528,0.34374 0.04716,0.0629 0.122786,0.086 0.171868,0.14731 0.07658,0.0957 0.157576,0.20668 0.242367,0.29147 0.04353,0.0435 0.10946,0.066 0.147314,0.12277 0.05944,0.0892 0.07026,0.21661 0.121415,0.29193 0.03137,0.0462 0.272883,0.31561 0.318328,0.34288 0.01405,0.008 0.03349,-0.005 0.04911,0 0.114435,0.036 -0.117535,0.016 0.06958,0.045 0.08088,0.0125 0.163687,0 0.245528,0 0.363386,0 0.604618,-0.35189 0.870397,-0.55122 0.07589,-0.0569 0.140343,-0.15293 0.227417,-0.18602 0.130535,-0.0496 0.473763,0.0767 0.601649,0.14532 0.05115,0.0275 0.122666,0.11076 0.166952,0.1424 0.08901,0.0636 0.185942,0.0997 0.270079,0.17187 0.06155,0.0527 0.09555,0.11769 0.147315,0.17186 0.07363,0.0771 1.309645,0.16804 1.433981,0.22434 0.03697,0.0168 0.916688,3.79626 0.938723,3.82536"
+         id="path6760"
+         sodipodi:nodetypes="cscssccsccssscscscccssscscccc" />
+    </clipPath>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient9099"
+       id="linearGradient9101"
+       x1="56.227158"
+       y1="115.88855"
+       x2="62.169956"
+       y2="106.32699"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient9596"
+       id="linearGradient9598"
+       x1="52.977837"
+       y1="115.5191"
+       x2="62.169956"
+       y2="106.32699"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-116.83775,-100.91996)">
+     transform="translate(-73.134971,-143.32061)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:Pacifico;-inkscape-font-specification:'Pacifico, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="117.01767"
-       y="110.15918"
-       id="text1617"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:Umpush;-inkscape-font-specification:'Umpush, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="84.949608"
+       y="152.3008"
+       id="text627"><tspan
          sodipodi:role="line"
-         id="tspan1615"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:Pacifico;-inkscape-font-specification:'Pacifico, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
-         x="117.01767"
-         y="110.15918">Instagram</tspan><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:Pacifico;-inkscape-font-specification:'Pacifico, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
-         x="117.01767"
-         y="123.38831"
-         id="tspan1619">só que melhor</tspan></text>
+         id="tspan625"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.58330002px;font-family:Umpush;-inkscape-font-specification:'Umpush, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="84.949608"
+         y="152.3008">ImShare</tspan></text>
+    <g
+       id="g8247"
+       transform="matrix(1.1269208,0,0,1.1269208,13.433145,23.498511)">
+      <rect
+         style="fill:url(#linearGradient9598);fill-opacity:1;stroke:none;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect1013-3"
+         width="9.1921186"
+         height="9.1921186"
+         x="52.977837"
+         y="106.32699"
+         rx="1.9476564"
+         ry="1.9476564"
+         clip-path="none" />
+      <circle
+         style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:0.260961;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2439"
+         cx="59.926273"
+         cy="108.56044"
+         r="0.86632133" />
+      <rect
+         style="fill:url(#linearGradient9101);fill-opacity:1;stroke:none;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect1013"
+         width="9.1921186"
+         height="9.1921186"
+         x="52.977837"
+         y="106.32699"
+         rx="1.9476564"
+         ry="1.9476564"
+         clip-path="url(#clipPath6758)" />
+    </g>
   </g>
 </svg>
