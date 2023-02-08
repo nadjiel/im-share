@@ -1,12 +1,12 @@
 <nav
-  class="h-16 w-full sticky top-0 bg-white/50 backdrop-blur shadow flex-row items-center z-20"
+  class="h-16 w-full md:px-10 sticky gap-1 md:gap-3 top-0 bg-white/50 backdrop-blur shadow flex-row items-center z-20"
   style="position: {{navPosition}}"
 >
   <a href="/" class="mr-auto flex">
     <img src='/img/logo.png' class="h-10 px-2"></img>
   </a>
   {% if not hidePublish %}
-    <a href="/publish" class="bg-blue-500 p-2 rounded-lg flex-row text-white items-center gap-1">
+    <a href="/publish" class="bg-blue-500 p-2 rounded-lg flex-row text-white items-center gap-1 hover:shadow-md">
       <i class="fa-solid fa-plus"></i>
             Publicar
     </a>
