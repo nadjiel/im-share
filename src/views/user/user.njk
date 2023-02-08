@@ -34,12 +34,18 @@
           {% for post in user.posts %}
             {% include "post/_postItem.njk" %}
           {% endfor %}
+        </section>
+      {% else %}
+        <span class="opacity-50 p-2">Sem postagens</span>
+      {% endif %}
+      {% if user.comments.length %}
+        <section class="grid gap-2 gap-y-4 md:gap-y-2 md:grid-cols-3 justify-center">
           {% for comment in user.comments %}
             {% include "comment/_commentAt.njk" %}
           {% endfor %}
         </section>
       {% else %}
-        <span class="opacity-50">Sem postagens</span>
+        <span class="opacity-50 p-2">Sem comentários</span>
       {% endif %}
     </div>
   </div>
