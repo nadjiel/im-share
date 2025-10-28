@@ -21,10 +21,10 @@
   },
   "homepage": "https://github.com/nadjiel/im-share#readme",
   "devDependencies": {
-    "prisma": "^4.8.1"
+    "prisma": "^6.18.0"
   },
   "dependencies": {
-    "@prisma/client": "^4.8.1",
+    "@prisma/client": "^6.18.0",
     "bcrypt": "^5.1.0",
     "cloudinary": "^1.33.0",
     "cloudinary-core": "^2.13.0",
