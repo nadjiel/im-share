@@ -1,7 +1,7 @@
 {
-  "name": "backend-redesorcial",
+  "name": "im-share",
   "version": "1.0.0",
-  "description": "",
+  "description": "An open source social website for sharing media with friends",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TrabalhosAcademicos358/BackEnd-RedeSorcial.git"
+    "url": "git+https://github.com/nadjiel/im-share.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TrabalhosAcademicos358/BackEnd-RedeSorcial/issues"
+    "url": "https://github.com/nadjiel/im-share/issues"
   },
-  "homepage": "https://github.com/TrabalhosAcademicos358/BackEnd-RedeSorcial#readme",
+  "homepage": "https://github.com/nadjiel/im-share#readme",
   "devDependencies": {
     "prisma": "^4.8.1"
   },
