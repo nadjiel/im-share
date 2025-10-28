@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { v2 } from "cloudinary";
 import { Router } from "express";
 import { signIn } from "./auth/signIn.js";
-import { CLOUDINARY_SECRET } from "./env.js";
+import { CLOUDINARY_SECRET, GOOGLE_CLIENT_ID } from "./env.js";
 import duration from "dayjs/plugin/duration.js";
 import { getPost } from "./post/getPostById.js";
 import { createPost } from "./post/createPost.js";
@@ -32,7 +32,7 @@ routes.get("/sign-in", async (req, res) => {
   if (req.logged) {
     return res.redirect("/");
   }
-  res.render("auth/signIn");
+  res.render("auth/signIn", { GOOGLE_CLIENT_ID });
 });
 
 routes.get("/profile", async (req, res) => {
