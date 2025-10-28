@@ -1,4 +1,16 @@
-FROM node:20-alpine
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm ci
+
+COPY . .
+
+RUN npx prisma generate
+
+FROM node:20-alpine AS runner
 
 ARG APP_USER=appuser
 ARG APP_GROUP=appgroup
@@ -9,18 +21,14 @@ ENV PORT=${DEFAULT_PORT}
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-
-RUN npm ci --omit-dev
-
-COPY . .
-
 # Create non-root user and group
 RUN addgroup -S ${APP_GROUP} \
  && adduser -S -G ${APP_GROUP} ${APP_USER}
 
-# Ensure non-root user owns the app files
-RUN chown -R ${APP_USER}:${APP_GROUP} /app
+ # Ensure non-root user owns the app files
+COPY --from=builder --chown=${APP_USER}:${APP_GROUP} /app ./
+
+RUN npm prune --omit=dev
 
 USER ${APP_USER}
 
