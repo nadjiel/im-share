@@ -1,6 +1,6 @@
 {
     "cSpell.language": "en,pt-BR",
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "cSpell.words": [
         "cloudinary",
         "dayjs"
