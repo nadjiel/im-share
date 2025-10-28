@@ -4,7 +4,7 @@ import cors from "cors";
 import express from "express";
 import nunjucks from "nunjucks";
 import cookieParser from "cookie-parser";
-import { CLOUDINARY_SERVER } from "./src/env.js";
+import { CLOUDINARY_SERVER, CLOUDINARY_NAME, CLOUDINARY_API_KEY } from "./src/env.js";
 import { apiRoutes } from "./src/apiRoutes.js";
 import { viewRoutes } from "./src/viewRoutes.js";
 import { handleError } from "./src/handleError.js";
@@ -12,6 +12,8 @@ import { handleError } from "./src/handleError.js";
 const app = express();
 
 app.locals.imageServer = CLOUDINARY_SERVER;
+app.locals.CLOUDINARY_NAME = CLOUDINARY_NAME;
+app.locals.CLOUDINARY_API_KEY = CLOUDINARY_API_KEY;
 
 app.use(cors());
 app.use(cookieParser());

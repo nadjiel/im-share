@@ -1,6 +1,3 @@
-const cloudName = "dlwoimstk";
-const apiKey = "378278351497316";
-
 const fileInput = document.querySelector("#file-input");
 const submitInput = document.querySelector("#submit-input");
 const imageDisplay = document.querySelector("#image-display");

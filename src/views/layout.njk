@@ -1,10 +1,12 @@
 {% set appName = "ImShare" %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{{ title }}{{ title and " - " }}{{ appName }}</title>
+        <title>{{ title }}{{ title and " - "}}{{ appName }}</title>
+
         <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -14,5 +16,24 @@
         <meta name="msapplication-TileColor" content="#2d89ef">
         <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
         <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" type="text/css" href="/css/index.css"> </head>
-</html></link>{% block style %}{% endblock %}<script src="https://cdn.tailwindcss.com"></script><script src="https://accounts.google.com/gsi/client" async defer></script><script src="https://kit.fontawesome.com/7642ff95a4.js" crossorigin="anonymous"></script></head><body class="min-h-screen flex-col relative">{% include "common/_nav.njk" %}{% block content %}{% endblock %}{% block script %}{% endblock %}</body></html>
+
+        <link rel="stylesheet" type="text/css" href="/css/index.css"></link>
+
+        {% block style %}{% endblock %}
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script src="https://kit.fontawesome.com/7642ff95a4.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="min-h-screen flex-col relative">
+        {% include "common/_nav.njk" %}
+
+        {% block content %}{% endblock %}
+
+        <script>
+            const cloudName = "{{ CLOUDINARY_NAME }}";
+            const apiKey = "{{ CLOUDINARY_API_KEY }}";
+        </script>
+        {% block script %}{% endblock %}
+    </body>
+</html>
