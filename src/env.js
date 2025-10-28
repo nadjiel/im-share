@@ -13,5 +13,5 @@ export const {
   CLOUDINARY_NAME,
   CLOUDINARY_API_KEY,
 
-  GOOGLE_CLIENT_ID = "372766069915-ca48cmscjcbehq752nrqtl0blfh05esk.apps.googleusercontent.com",
+  GOOGLE_CLIENT_ID
 } = process.env;
