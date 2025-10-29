@@ -1,8 +1,7 @@
 node_modules
 .git
 .env
-.env.local
-.env.example
+.env.*
 .DS_Store
 npm-debug.log
 .vscode
