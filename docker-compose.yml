@@ -1,12 +1,22 @@
 services:
 
+  app:
+    build: .
+    image: im-share:latest
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+      - cache
+
   db:
     image: postgres:16-alpine
     restart: unless-stopped
     ports:
       - 5432:5432
-    env_file:
-      - .env
+    env_file: .env
     volumes:
       - db_data:/var/lib/postgresql/data
     healthcheck:
@@ -15,7 +25,7 @@ services:
       timeout: 5s
       retries: 5
 
-  redis:
+  cache:
     image: redis:7-alpine
     restart: unless-stopped
     ports:
